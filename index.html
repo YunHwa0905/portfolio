@@ -6,7 +6,7 @@
     <title>이윤화 | Backend & AI Engineer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700;900&family=Noto+Serif+KR:wght@300;400&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
     <script>tailwind.config = { darkMode: 'media' }</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -42,10 +42,9 @@
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
 
-        /* ── HERO: Perry Wang-style floating window ─────────────── */
+        /* ── HERO ─────────────────────────────────────────────── */
         body { overflow-x: hidden; }
 
-        /* Desktop background that wraps the window */
         .hw-wrap {
             width: 100vw;
             margin-left: calc(50% - 50vw);
@@ -60,7 +59,6 @@
             .hw-wrap { background: #F8F8F8; }
         }
 
-        /* The floating OS window */
         .hw-window {
             width: 100%; height: 100%;
             border-radius: 13px;
@@ -68,6 +66,7 @@
             display: flex; flex-direction: column;
             background: #0d0d0d;
             box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.30),
                 0 0 0 0.5px rgba(255,255,255,0.07),
                 0 40px 100px rgba(0,0,0,0.9),
                 0 10px 30px rgba(0,0,0,0.7);
@@ -76,24 +75,48 @@
             .hw-window {
                 background: #ffffff;
                 box-shadow:
+                    inset 0 1px 0 rgba(255,255,255,0.98),
+                    inset 0 -1px 0 rgba(0,0,0,0.07),
                     0 0 0 0.5px rgba(0,0,0,0.10),
-                    0 24px 64px rgba(0,0,0,0.16),
+                    0 28px 70px rgba(0,0,0,0.18),
                     0 6px 16px rgba(0,0,0,0.07);
             }
         }
 
-        /* Title bar — dark metallic gradient */
         .hw-titlebar {
             height: 44px; flex-shrink: 0;
             display: flex; align-items: center; justify-content: space-between;
             padding: 0 14px;
             background: linear-gradient(180deg, #3e3e3e 0%, #2b2b2b 100%);
             border-bottom: 1px solid rgba(0,0,0,0.55);
+            position: relative;
+        }
+        .hw-titlebar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%; right: 10%; height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255,255,255,0.25) 25%,
+                rgba(255,255,255,0.50) 50%,
+                rgba(255,255,255,0.25) 75%,
+                transparent 100%
+            );
+            pointer-events: none;
         }
         @media (prefers-color-scheme: light) {
             .hw-titlebar {
                 background: linear-gradient(180deg, #e2e2e2 0%, #cccccc 100%);
                 border-bottom-color: rgba(0,0,0,0.16);
+            }
+            .hw-titlebar::after {
+                background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(255,255,255,0.70) 25%,
+                    rgba(255,255,255,0.98) 50%,
+                    rgba(255,255,255,0.70) 75%,
+                    transparent 100%
+                );
             }
         }
 
@@ -111,192 +134,18 @@
             .hw-plus { color: rgba(0,0,0,0.28); }
         }
 
-        /* Window body */
         .hw-body {
             flex: 1; position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: center;
             padding: 3rem 5rem;
-        }
-        @media (max-width: 768px) { .hw-body { padding: 3rem 2.5rem; } }
-
-        /* Big headline */
-        .hw-h1 {
-            font-family: 'Noto Sans KR', -apple-system, sans-serif;
-            font-size: clamp(2.2rem, 4.6vw, 4.6rem);
-            font-weight: 900;
-            letter-spacing: -0.01em;
-            line-height: 1.18;
-            color: #ffffff;
-            margin-bottom: 2.6rem;
-            word-break: keep-all;
-            /* 3-layer luminous glow: tight core → mid halo → outer bloom */
-            text-shadow:
-                0 0 2px  rgba(255,255,255,0.90),
-                0 0 14px rgba(255,255,255,0.30),
-                0 0 48px rgba(255,255,255,0.14);
-        }
-        @media (prefers-color-scheme: light) {
-            .hw-h1 {
-                color: #080808;
-                /* Indigo aura — mirrors white glow of dark mode */
-                text-shadow:
-                    0 0 2px  rgba(88, 80, 236, 0.10),
-                    0 0 24px rgba(88, 80, 236, 0.10),
-                    0 0 80px rgba(88, 80, 236, 0.07);
-            }
-        }
-
-        /* Serif italic accent line — elegant weight contrast */
-        .hw-serif {
-            font-family: 'Noto Serif KR', Georgia, serif;
-            font-style: italic;
-            font-weight: 300;
-            color: rgba(255,255,255,0.82);
-            letter-spacing: 0.01em;
-            /* softer, warmer glow than the headline */
-            text-shadow:
-                0 0 2px  rgba(255,255,255,0.60),
-                0 0 18px rgba(255,255,255,0.22),
-                0 0 50px rgba(255,255,255,0.10);
-        }
-        @media (prefers-color-scheme: light) {
-            .hw-serif {
-                color: #1a1a1a;
-                text-shadow:
-                    0 0 2px  rgba(88, 80, 236, 0.14),
-                    0 0 20px rgba(88, 80, 236, 0.10),
-                    0 0 60px rgba(88, 80, 236, 0.06);
-            }
-        }
-
-        /* Sub-text */
-        .hw-desc1 {
-            font-family: 'Noto Sans KR', -apple-system, sans-serif;
-            font-size: 1rem; font-weight: 700;
-            color: rgba(255,255,255,0.90);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.01em;
-            text-shadow: 0 0 12px rgba(255,255,255,0.18);
-        }
-        .hw-desc2 {
-            font-family: 'Noto Sans KR', -apple-system, sans-serif;
-            font-size: 0.88rem; font-weight: 300;
-            color: rgba(255,255,255,0.46);
-            letter-spacing: 0.015em;
-            line-height: 1.6;
-        }
-        @media (prefers-color-scheme: light) {
-            .hw-desc1 {
-                color: #111111;
-                text-shadow: none;
-            }
-            .hw-desc2 { color: #888888; }
-        }
-
-        /* Scroll arrow */
-        .hw-arrow {
-            position: absolute; bottom: 2.2rem; left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            color: rgba(255,255,255,0.55);
-            font-size: 1.5rem;
-            animation: hwBounce 2.4s ease-in-out infinite;
-        }
-        .hw-arrow::before { display: none; }
-        @media (prefers-color-scheme: light) {
-            .hw-arrow { color: rgba(0,0,0,0.38); }
-            .hw-arrow::before {
-                background: linear-gradient(
-                    to bottom,
-                    transparent 0%,
-                    rgba(0,0,0,0.32) 100%
-                );
-            }
-        }
-        @keyframes hwBounce {
-            0%,100% { transform: translateX(-50%) translateY(0); }
-            50%      { transform: translateX(-50%) translateY(9px); }
-        }
-
-        /* Headline line-by-line reveal */
-        @keyframes hwReveal {
-            from { opacity:0; transform:translateY(28px); }
-            to   { opacity:1; transform:translateY(0); }
-        }
-        .hw-line { opacity:0; animation: hwReveal 0.85s cubic-bezier(0.16,1,0.3,1) forwards; }
-        .hw-line:nth-child(1) { animation-delay: 0.08s; }
-        .hw-line:nth-child(2) { animation-delay: 0.22s; }
-        .hw-line:nth-child(3) { animation-delay: 0.36s; }
-        @keyframes hwSubReveal {
-            from { opacity:0; transform:translateY(12px); }
-            to   { opacity:1; transform:translateY(0); }
-        }
-        .hw-sub-anim { opacity:0; animation: hwSubReveal 0.7s ease forwards; }
-        .hw-sub-anim:nth-child(1) { animation-delay: 0.55s; }
-        .hw-sub-anim:nth-child(2) { animation-delay: 0.68s; }
-
-        /* ── Lighting & shadow atmosphere ──────────────────────── */
-
-        /* 1. Window rim: top edge — overhead light source */
-        .hw-window {
-            box-shadow:
-                inset 0 1px 0 rgba(255,255,255,0.30),
-                0 0 0 0.5px rgba(255,255,255,0.07),
-                0 40px 100px rgba(0,0,0,0.9),
-                0 10px 30px rgba(0,0,0,0.7);
-        }
-        @media (prefers-color-scheme: light) {
-            .hw-window {
-                box-shadow:
-                    inset 0 1px 0 rgba(255,255,255,0.98),
-                    inset 0 -1px 0 rgba(0,0,0,0.07),
-                    0 0 0 0.5px rgba(0,0,0,0.10),
-                    0 28px 70px rgba(0,0,0,0.18),
-                    0 6px 16px rgba(0,0,0,0.07);
-            }
-        }
-
-        /* 2. Title bar: center specular shine */
-        .hw-titlebar { position: relative; }
-        .hw-titlebar::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 10%; right: 10%; height: 1px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(255,255,255,0.25) 25%,
-                rgba(255,255,255,0.50) 50%,
-                rgba(255,255,255,0.25) 75%,
-                transparent 100%
-            );
-            pointer-events: none;
-        }
-        @media (prefers-color-scheme: light) {
-            .hw-titlebar::after {
-                background: linear-gradient(90deg,
-                    transparent 0%,
-                    rgba(255,255,255,0.70) 25%,
-                    rgba(255,255,255,0.98) 50%,
-                    rgba(255,255,255,0.70) 75%,
-                    transparent 100%
-                );
-            }
-        }
-
-        /* 3. Window body: top-to-bottom gradient
-           — overflow:hidden on .hw-window clips everything inside the border-radius */
-        .hw-body {
             background: linear-gradient(
                 to bottom,
                 rgba(255,255,255,0.10) 0%,
                 transparent 50%
             );
         }
+        @media (max-width: 768px) { .hw-body { padding: 3rem 2.5rem; } }
 
-        /* Center-top radial glow anchored at top of body (inside window, clipped) */
         .hw-body::before {
             content: '';
             position: absolute; inset: 0; pointer-events: none; z-index: 0;
@@ -307,7 +156,6 @@
                 transparent 62%
             );
         }
-        /* Bottom vignette */
         .hw-body::after {
             content: '';
             position: absolute; bottom: 0; left: 0; right: 0;
@@ -341,10 +189,351 @@
             }
         }
 
-        /* Ensure text sits above pseudo-element layers */
         .hw-body > * { position: relative; z-index: 1; }
-        /* Restore absolute positioning for arrow (overrides rule above) */
-        .hw-body > .hw-arrow { position: absolute; z-index: 2; }
+        .hw-body > .hw-arrow  { position: absolute; z-index: 2; }
+        .hw-body > .hw-velog  { position: absolute; z-index: 2; }
+
+        .hw-h1 {
+            font-family: 'Nanum Myeongjo', serif;
+            font-size: clamp(2.2rem, 4.6vw, 4.6rem);
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            line-height: 1.18;
+            color: #ffffff;
+            margin-bottom: 2.6rem;
+            word-break: keep-all;
+            text-shadow:
+                0 0 2px  rgba(255,255,255,0.90),
+                0 0 14px rgba(255,255,255,0.30),
+                0 0 48px rgba(255,255,255,0.14);
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-h1 {
+                color: #080808;
+                text-shadow:
+                    0 0 2px  rgba(88, 80, 236, 0.10),
+                    0 0 24px rgba(88, 80, 236, 0.10),
+                    0 0 80px rgba(88, 80, 236, 0.07);
+            }
+        }
+
+        .hw-serif {
+            font-family: 'Noto Serif KR', Georgia, serif;
+            font-style: italic;
+            font-weight: 300;
+            color: rgba(255,255,255,0.82);
+            letter-spacing: 0.01em;
+            text-shadow:
+                0 0 2px  rgba(255,255,255,0.60),
+                0 0 18px rgba(255,255,255,0.22),
+                0 0 50px rgba(255,255,255,0.10);
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-serif {
+                color: #1a1a1a;
+                text-shadow:
+                    0 0 2px  rgba(88, 80, 236, 0.14),
+                    0 0 20px rgba(88, 80, 236, 0.10),
+                    0 0 60px rgba(88, 80, 236, 0.06);
+            }
+        }
+
+        .hw-desc1 {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            font-size: 1rem; font-weight: 700;
+            color: rgba(255,255,255,0.90);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.01em;
+            text-shadow: 0 0 12px rgba(255,255,255,0.18);
+        }
+        .hw-desc2 {
+            font-family: 'Noto Sans KR', -apple-system, sans-serif;
+            font-size: 0.88rem; font-weight: 300;
+            color: rgba(255,255,255,0.46);
+            letter-spacing: 0.015em;
+            line-height: 1.6;
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-desc1 { color: #111111; text-shadow: none; }
+            .hw-desc2 { color: #888888; }
+        }
+
+        .hw-arrow {
+            position: absolute; bottom: 2.2rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.55);
+            font-size: 1.5rem;
+            animation: hwBounce 2.4s ease-in-out infinite;
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-arrow { color: rgba(0,0,0,0.38); }
+        }
+        @keyframes hwBounce {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(9px); }
+        }
+
+        @keyframes hwReveal {
+            from { opacity:0; transform:translateY(28px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .hw-line { opacity:0; animation: hwReveal 0.85s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .hw-line:nth-child(1) { animation-delay: 0.08s; }
+        .hw-line:nth-child(2) { animation-delay: 0.22s; }
+        .hw-line:nth-child(3) { animation-delay: 0.36s; }
+        @keyframes hwSubReveal {
+            from { opacity:0; transform:translateY(12px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .hw-sub-anim { opacity:0; animation: hwSubReveal 0.7s ease forwards; }
+        .hw-sub-anim:nth-child(1) { animation-delay: 0.55s; }
+        .hw-sub-anim:nth-child(2) { animation-delay: 0.68s; }
+
+        /* ── 레이더(스킬바) 패널 ────────────────────────────── */
+        .hw-radar {
+            display: none;
+            position: absolute;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            flex-direction: column;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.09);
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            opacity: 0;
+            animation: hwSubReveal 0.75s ease forwards;
+            animation-delay: 1.1s;
+        }
+        @media (min-width: 1200px) { .hw-radar { display: flex; } }
+        @media (prefers-color-scheme: light) {
+            .hw-radar { border-color: rgba(0,0,0,0.09); background: rgba(255,255,255,0.80); }
+        }
+        .hw-radar-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-radar-header { border-bottom-color: rgba(0,0,0,0.07); }
+        }
+        .hw-radar-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.58rem; font-weight: 700;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: rgba(255,255,255,0.38);
+        }
+        @media (prefers-color-scheme: light) { .hw-radar-label { color: rgba(0,0,0,0.35); } }
+        .hw-radar-body { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 9px; }
+        .hw-skill-row { display: flex; flex-direction: column; gap: 4px; }
+        .hw-skill-top { display: flex; justify-content: space-between; align-items: baseline; }
+        .hw-skill-name {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.63rem; font-weight: 700;
+            color: rgba(255,255,255,0.78);
+        }
+        @media (prefers-color-scheme: light) { .hw-skill-name { color: #1a1a1a; } }
+        .hw-skill-val {
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.28);
+            font-variant-numeric: tabular-nums;
+        }
+        @media (prefers-color-scheme: light) { .hw-skill-val { color: rgba(0,0,0,0.28); } }
+        .hw-skill-track {
+            width: 100%; height: 2px; border-radius: 999px;
+            background: rgba(255,255,255,0.08); overflow: hidden;
+        }
+        @media (prefers-color-scheme: light) { .hw-skill-track { background: rgba(0,0,0,0.08); } }
+        .hw-skill-fill {
+            height: 100%; border-radius: 999px;
+            width: 0%; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* ── Velog 슬라이드 패널 (비활성) ── */
+        .hw-velog {
+            display: none;
+            position: absolute;
+            right: 3rem;
+            /* 텍스트 블록 중앙과 맞춤 — body는 flex column center이므로 약간 위 */
+            top: 50%;
+            transform: translateY(-52%);
+            width: 230px;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.09);
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            opacity: 0;
+            animation: hwSubReveal 0.75s ease forwards;
+            animation-delay: 1.1s;
+        }
+        @media (min-width: 1200px) {
+            .hw-velog { display: flex; }
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog {
+                border-color: rgba(0,0,0,0.09);
+                background: rgba(255,255,255,0.75);
+                backdrop-filter: blur(16px);
+            }
+        }
+
+        /* 헤더 */
+        .hw-velog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            flex-shrink: 0;
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-header { border-bottom-color: rgba(0,0,0,0.07); }
+        }
+
+        .hw-velog-label {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.60rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.38);
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-label { color: rgba(0,0,0,0.35); }
+        }
+
+        .hw-velog-ext {
+            font-size: 0.70rem;
+            color: rgba(255,255,255,0.28);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .hw-velog-ext:hover { color: rgba(255,255,255,0.65); }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-ext { color: rgba(0,0,0,0.28); }
+            .hw-velog-ext:hover { color: rgba(0,0,0,0.65); }
+        }
+
+        /* 슬라이드 뷰포트 */
+        .hw-velog-slider {
+            position: relative;
+            overflow: hidden;
+            /* 카드 하나 높이 고정 */
+            height: 130px;
+            flex-shrink: 0;
+        }
+
+        .hw-velog-track {
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 카드 하나 */
+        .hw-velog-item {
+            display: block;
+            min-height: 130px;
+            flex-shrink: 0;
+            padding: 14px 14px 12px;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+        .hw-velog-item:hover { background: rgba(255,255,255,0.04); }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-item:hover { background: rgba(0,0,0,0.025); }
+        }
+
+        .hw-velog-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.73rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.86);
+            line-height: 1.5;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-title { color: #111111; }
+        }
+
+        .hw-velog-desc {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.64rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.34);
+            line-height: 1.55;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-desc { color: #aaaaaa; }
+        }
+
+        .hw-velog-meta {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.59rem;
+            color: rgba(255,255,255,0.22);
+            letter-spacing: 0.02em;
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-meta { color: #cccccc; }
+        }
+
+        .hw-velog-tag {
+            margin-left: 5px;
+            color: rgba(129,120,255,0.85);
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-tag { color: rgba(88,80,236,0.85); }
+        }
+
+        /* dot indicator */
+        .hw-velog-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 0 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            flex-shrink: 0;
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-velog-dots { border-top-color: rgba(0,0,0,0.05); }
+        }
+
+        .hw-dot-ind {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.18);
+            transition: background 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .hw-dot-ind.active {
+            background: rgba(255,255,255,0.70);
+            transform: scale(1.2);
+        }
+        @media (prefers-color-scheme: light) {
+            .hw-dot-ind { background: rgba(0,0,0,0.15); }
+            .hw-dot-ind.active { background: rgba(0,0,0,0.55); }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-indigo-500 selection:text-white">
@@ -366,7 +555,7 @@
         </div>
 
         <div class="flex items-center space-x-6 text-sm text-gray-500 dark:text-neutral-300">
-            <a href="https://github.com" target="_blank" class="hover:text-gray-900 dark:hover:text-white transition-colors">GitHub ↗</a>
+            <a href="https://github.com/YunHwa0905" target="_blank" class="hover:text-gray-900 dark:hover:text-white transition-colors">GitHub ↗</a>
             <a href="mailto:yoho030905@gmail.com" class="hover:text-gray-900 dark:hover:text-white transition-colors">Contact ↗</a>
         </div>
     </header>
@@ -379,7 +568,6 @@
             <section class="hw-wrap">
                 <div class="hw-window">
 
-                    <!-- Title bar -->
                     <div class="hw-titlebar">
                         <div class="hw-dots">
                             <span class="hw-dot hw-dot-r"></span>
@@ -389,22 +577,27 @@
                         <span class="hw-plus">+</span>
                     </div>
 
-                    <!-- Body -->
                     <div class="hw-body">
 
-                        <!-- Headline -->
                         <h2 class="hw-h1">
                             <span class="hw-line block">Backend를 설계하고,</span>
                             <span class="hw-line block">AI를 연결하며,</span>
                             <span class="hw-line block"><span class="hw-serif">서비스를 완성합니다.</span></span>
                         </h2>
 
-                        <!-- Sub-text -->
-                        <p class="hw-desc1 hw-sub-anim">Backend & AI Engineer. Based in Seoul.</p>
-                        <p class="hw-desc2 hw-sub-anim">SK Shieldus Rookies 2기 수료 · 실행력과 소통으로 결과를 만드는 개발자.</p>
+                        <p class="hw-desc1 hw-sub-anim">Backend & AI Engineer</p>
+                        <p class="hw-desc2 hw-sub-anim">실행력과 소통으로 결과를 만드는 개발자</p>
 
-                        <!-- Scroll arrow -->
                         <div class="hw-arrow">↓</div>
+
+                        <!-- ── 스킬 레이더 패널 ── -->
+                        <div class="hw-radar" id="hw-radar">
+                            <div class="hw-radar-header">
+                                <span class="hw-radar-label">Skill · Level</span>
+                            </div>
+                            <div class="hw-radar-body" id="hw-radar-body"></div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -506,7 +699,6 @@
                                 <span>⚡ [Troubleshooting] SSE 연결 해제 시 발생하는 동시성 예외 트래킹</span>
                                 <span id="icon-trouble-1" class="text-sm font-bold">▼</span>
                             </button>
-
                             <div id="content-trouble-1" class="accordion-content space-y-3 text-xs leading-relaxed">
                                 <p><strong class="text-red-600 dark:text-red-400">증상:</strong> 멀티 스레드 이벤트 전송 시 `ConcurrentModificationException` 무작위 발생으로 서버 다운타임 직면.</p>
                                 <p><strong class="text-amber-600 dark:text-amber-400">원인:</strong> 표준 `ArrayList`로 클라이언트 구독 리스트를 순회하던 중 타 유저의 네트워크 차단으로 요소를 수정/삭제하려 해 충돌 발생.</p>
@@ -565,7 +757,6 @@ private final List&lt;SseEmitter&gt; emitters = new CopyOnWriteArrayList&lt;&gt;
                                 <span>⚡ [Troubleshooting] systemd 및 GitHub Actions CI/CD 에러 제어</span>
                                 <span id="icon-trouble-2" class="text-sm font-bold">▼</span>
                             </button>
-
                             <div id="content-trouble-2" class="accordion-content space-y-3 text-xs leading-relaxed">
                                 <p><strong class="text-red-600 dark:text-red-400">상황 1 (systemd):</strong> Ubuntu EC2 최초 이중화 배포 기동 시 가상환경 절대 경로 오인식으로 인한 `ai.service failed` 현상 직면. ➔ <span class="text-emerald-600 dark:text-emerald-400">조치:</span> systemd 유닛 스크립트 내 `WorkingDirectory`와 `ExecStart` 파라미터의 풀 패스를 명확하게 가상환경 내부 주소로 지정하여 에러 조치 완료.</p>
                                 <p><strong class="text-amber-600 dark:text-amber-400">상황 2 (CI/CD):</strong> 자동 배포 과정에서 `Permission denied (publickey)` 에러로 오토 데브옵스 중단 현상 발생. ➔ <span class="text-emerald-600 dark:text-emerald-400">조치:</span> GitHub Secrets 암호화 키 업로드 과정에서 생기는 미세 공백 에러 서식을 제거 및 Trim 처리 후 정상 배포 통과 해결.</p>
@@ -644,6 +835,7 @@ private final List&lt;SseEmitter&gt; emitters = new CopyOnWriteArrayList&lt;&gt;
     </footer>
 
     <script>
+        /* ── 탭 전환 ── */
         function switchTab(tabName) {
             const workBtn = document.getElementById('tab-work-btn');
             const infoBtn = document.getElementById('tab-info-btn');
@@ -667,10 +859,10 @@ private final List&lt;SseEmitter&gt; emitters = new CopyOnWriteArrayList&lt;&gt;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        /* ── 아코디언 ── */
         function toggleAccordion(id) {
             const content = document.getElementById('content-' + id);
             const icon = document.getElementById('icon-' + id);
-
             if (content.classList.contains('open')) {
                 content.classList.remove('open');
                 icon.innerText = '▼';
@@ -679,6 +871,57 @@ private final List&lt;SseEmitter&gt; emitters = new CopyOnWriteArrayList&lt;&gt;
                 icon.innerText = '▲';
             }
         }
+
+        /* ── 스킬 바 렌더 ── */
+        (function renderSkillBars() {
+            const body = document.getElementById('hw-radar-body');
+            if (!body) return;
+
+            const SKILLS = [
+                {
+                    name: 'AI / LLM',
+                    val: 68,
+                    color: 'linear-gradient(90deg, #818cf8, #a78bfa)'
+                },
+                {
+                    name: 'Python / FastAPI',
+                    val: 62,
+                    color: 'linear-gradient(90deg, #34d399, #6ee7b7)'
+                },
+                {
+                    name: 'SQL / DB',
+                    val: 65,
+                    color: 'linear-gradient(90deg, #38bdf8, #7dd3fc)'
+                },
+                {
+                    name: 'Java / Spring',
+                    val: 55,
+                    color: 'linear-gradient(90deg, #fb923c, #fcd34d)'
+                },
+            ];
+
+            body.innerHTML = SKILLS.map(s => `
+                <div class="hw-skill-row">
+                    <div class="hw-skill-top">
+                        <span class="hw-skill-name">${s.name}</span>
+                        <span class="hw-skill-val">${s.val}</span>
+                    </div>
+                    <div class="hw-skill-track">
+                        <div class="hw-skill-fill" data-val="${s.val}"
+                             style="background: ${s.color};"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            /* 진입 애니메이션 — 약간 딜레이 후 width 확장 */
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    body.querySelectorAll('.hw-skill-fill').forEach(el => {
+                        el.style.width = el.dataset.val + '%';
+                    });
+                }, 400);
+            });
+        })();
     </script>
 </body>
 </html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STARS | 이윤화 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar detail-wide">
+  <div class="topbar-inner">
+    <div class="topbar-name"><span class="mono">이</span>이윤화</div>
+    <div class="topbar-links"><a href="index.html#projects">← Projects</a></div>
+  </div>
+</div>
+
+<main class="detail-main">
+  <header class="article-header">
+    <div class="role hero-fade">Case Study</div>
+    <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">Backend</span><span class="tag">MSA</span><span class="tag">Real-time</span></div>
+    <h1 class="hero-fade-delay-1">STARS — 서울 실시간 혼잡도·AI 여행 추천 플랫폼</h1>
+    <div class="a-period hero-fade-delay-2">2025.03.25 – 2025.06.05 (73일) · 팀 12명 (FE 3 · BE 5 · AI 2 · Cloud 2) · 백엔드 + 프론트엔드(챗봇)</div>
+    <blockquote class="hero-fade-delay-2">서울의 실시간 도시 데이터를 AI 여행 추천으로 연결한 플랫폼입니다.</blockquote>
+    <div class="hero-cta hero-fade-delay-2" style="margin-top:20px;">
+      <a class="hero-btn primary" href="https://github.com/SentryRookies/Back-STARS" target="_blank" rel="noopener">GitHub <span class="arrow">→</span></a>
+      <a class="hero-btn" href="#demo">Demo <span class="arrow">→</span></a>
+      <a class="hero-btn" href="https://documenter.getpostman.com/view/29374455/2sB2qZEN9h" target="_blank" rel="noopener">API Docs <span class="arrow">→</span></a>
+    </div>
+  </header>
+
+  <section class="a-section reveal">
+    <span class="a-label">Overview</span>
+    <h2>프로젝트 개요</h2>
+    <div class="ps-row"><div class="k">Problem</div><div class="v">서울 관광지는 실시간 혼잡도·주차·날씨 정보가 여러 플랫폼에 흩어져 있어, 사용자가 여행 일정을 효율적으로 계획하기 어려웠습니다.</div></div>
+    <div class="ps-row"><div class="k">Solution</div><div class="v">Kafka 기반 실시간 데이터 파이프라인과 AI 여행 추천을 결합해, 서울 열린데이터광장의 혼잡도·날씨·주차·관광 데이터를 통합 제공하는 플랫폼을 개발했습니다. Elasticsearch로 검색 성능을 확보했습니다.</div></div>
+    <ul class="role-list" style="margin-top:16px;">
+      <li>AI 여행 코스 추천</li>
+      <li>실시간 혼잡도 조회</li>
+      <li>주차장 현황 조회</li>
+      <li>날씨 조회</li>
+      <li>AI 챗봇</li>
+    </ul>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Project Highlights</span>
+    <h2>핵심 성과</h2>
+    <ul class="role-check">
+      <li><span class="check">✔</span> REST API 10개 직접 개발</li>
+      <li><span class="check">✔</span> SSE 기반 실시간 스트리밍(주차·날씨) 구현</li>
+      <li><span class="check">✔</span> JWT + Redis Token Version 인증 구조 설계</li>
+    </ul>
+  </section>
+
+  <section class="a-section reveal" id="demo">
+    <span class="a-label">Demo</span>
+    <h2>시연 영상</h2>
+    <video class="diagram-svg" controls preload="metadata" poster="assets/stars-shot-main.png">
+      <source src="https://github.com/YunHwa0905/portfolio/releases/download/v1.0-demov/stars-demo.mp4" type="video/mp4">
+      브라우저가 video 태그를 지원하지 않습니다. <a href="https://github.com/YunHwa0905/portfolio/releases/download/v1.0-demov/stars-demo.mp4">영상 다운로드</a>
+    </video>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Architecture</span>
+    <h2>아키텍처</h2>
+    <ul class="role-list">
+      <li>User / Place / ExternalInfo / Congestion 서비스를 MSA로 분리</li>
+      <li>Kafka + StreamSets로 실시간 데이터 수집</li>
+      <li>Elasticsearch에 색인하여 검색 속도 개선</li>
+      <li>Gateway를 통해 API 통합, Redis·PostgreSQL을 역할에 맞게 분리</li>
+    </ul>
+    <img class="diagram-svg" src="assets/stars-architecture.png" alt="STARS 전체 시스템 아키텍처 — EKS 클러스터 기반 Backend/Frontend/AI/Data Processing 구성도" style="margin-top:14px;">
+
+    <p style="margin-top:28px; color:var(--ink-faint); font-size:13px; letter-spacing:.04em; text-transform:uppercase; font-weight:700;">내가 담당한 부분</p>
+    <svg class="diagram-svg" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="margin-top:8px;">
+      <defs>
+        <marker id="arrow2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/>
+        </marker>
+      </defs>
+      <rect x="280" y="10" width="140" height="40" rx="6" fill="#171a1f"/>
+      <text x="350" y="35" text-anchor="middle" fill="#fff" font-size="13" font-family="Pretendard, sans-serif" font-weight="700">Client</text>
+      <line x1="350" y1="50" x2="350" y2="76" stroke="#8a8f99" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+      <rect x="250" y="78" width="200" height="40" rx="6" fill="#f6f4ef" stroke="#b3924f" stroke-width="1.5"/>
+      <text x="350" y="103" text-anchor="middle" fill="#171a1f" font-size="12.5" font-family="Pretendard, sans-serif" font-weight="700">Gateway</text>
+      <line x1="350" y1="118" x2="350" y2="142" stroke="#8a8f99" stroke-width="1.5" marker-end="url(#arrow2)"/>
+
+      <g font-family="Pretendard, sans-serif" font-size="12" font-weight="700">
+        <rect x="30" y="144" width="150" height="44" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
+        <text x="105" y="171" text-anchor="middle" fill="#1b64da">User Service</text>
+
+        <rect x="200" y="144" width="150" height="44" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
+        <text x="275" y="171" text-anchor="middle" fill="#1b64da">Place Service</text>
+
+        <rect x="370" y="144" width="150" height="44" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
+        <text x="445" y="163" text-anchor="middle" fill="#1b64da">ExternalInfo</text>
+        <text x="445" y="178" text-anchor="middle" fill="#1b64da" font-size="10.5">(주차·날씨 담당)</text>
+
+        <rect x="540" y="144" width="150" height="44" rx="6" fill="#f2f2f0" stroke="#c8cad0" stroke-width="1.5"/>
+        <text x="615" y="171" text-anchor="middle" fill="#9aa0a8">Congestion (팀원)</text>
+      </g>
+
+      <line x1="105" y1="188" x2="200" y2="226" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <line x1="130" y1="188" x2="370" y2="226" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <line x1="275" y1="188" x2="240" y2="226" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <line x1="445" y1="188" x2="510" y2="226" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow2)"/>
+
+      <rect x="150" y="228" width="140" height="42" rx="6" fill="#1f3a5f"/>
+      <text x="220" y="253" text-anchor="middle" fill="#f5efe1" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">PostgreSQL</text>
+
+      <rect x="310" y="228" width="100" height="42" rx="6" fill="#1f3a5f"/>
+      <text x="360" y="253" text-anchor="middle" fill="#f5efe1" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">Redis</text>
+
+      <rect x="440" y="228" width="140" height="42" rx="6" fill="#1f3a5f"/>
+      <text x="510" y="253" text-anchor="middle" fill="#f5efe1" font-size="11.5" font-family="Pretendard, sans-serif" font-weight="700">Elasticsearch</text>
+    </svg>
+    <div class="tag-row" style="margin-top:14px;">
+      <span class="tag tag-gold">User Service — Auth (PostgreSQL·Redis)</span>
+      <span class="tag tag-gold">Place Service — PostgreSQL</span>
+      <span class="tag tag-gold">External Info — 주차·날씨 SSE (Elasticsearch)</span>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">My Role</span>
+    <h2>본인 역할</h2>
+    <div class="role-split">
+      <h3>핵심 기여</h3>
+      <ul class="role-check">
+        <li><span class="check">✔</span> JWT + Redis Token Version 기반 인증 구조 설계 (로그인·로그아웃·강제 무효화)</li>
+        <li><span class="check">✔</span> SSE 기반 실시간 주차 정보 스트리밍 구현 (날씨 스트리밍 공동 개발)</li>
+        <li><span class="check">✔</span> Elasticsearch REST 쿼리 직접 연동 (ParkEsService·WeatherEsService) — RestTemplate 기반 쿼리 작성 및 Aggregation 파싱</li>
+        <li><span class="check">✔</span> User·Place 서비스 API 8개 개발 (인증 5, 장소 3)</li>
+      </ul>
+      <h3>협업</h3>
+      <ul class="role-list">
+        <li>프로젝트 주제 아이디어를 직접 제안하고 선정</li>
+        <li>프론트엔드 챗봇 UI 기능 담당 및 사용자 경험 개선</li>
+        <li>매일 스크럼 회의 및 매주 스프린트 회고 진행</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Tech Stack</span>
+    <h2>기술 스택</h2>
+    <div class="tech-pill-row">
+      <span class="skill-pill">Spring Boot</span>
+      <span class="skill-pill">PostgreSQL</span>
+      <span class="skill-pill">Redis</span>
+      <span class="skill-pill">Elasticsearch</span>
+      <span class="skill-pill">JWT</span>
+      <span class="skill-pill">SSE</span>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Problem Solving</span>
+    <h2>문제 해결 과정</h2>
+
+    <div class="ps-block">
+      <h3>SSE 연결 관리 — ConcurrentModificationException과 좀비 커넥션</h3>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">SSE 연결 해제 시 ConcurrentModificationException이 발생하며 서버 오류로 이어졌습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">ArrayList로 emitter 목록을 관리하던 중, 스케줄러가 순회하며 push하는 도중 다른 커넥션 종료로 리스트가 함께 수정되면서 충돌이 발생했습니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">emitter 목록을 CopyOnWriteArrayList로 교체해 순회 중에도 안전하게 추가·제거가 가능하도록 했습니다. 실제 커넥션 정리는 emitter.send() 실패 시 catch 블록의 emitters.remove(emitter) 예외 처리 로직이 담당합니다.</div></div>
+      <div class="code-block" style="margin:4px 0 14px;">try {
+    emitter.send(SseEmitter.event().data(data));
+} catch (IOException | IllegalStateException e) {
+    emitter.completeWithError(e);
+    emitters.remove(emitter);   // 순회 중 안전하게 제거 (CopyOnWriteArrayList)
+}</div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">ConcurrentModificationException 발생을 제거하여 5분 주기 SSE를 안정적으로 운영했으며, 여러 사용자가 동시에 연결된 상태에서도 순회 중 예외 없이 스트리밍을 유지했습니다.</div></div>
+      <div class="ps-learn"><b>회고 —</b> SseEmitter(0L)로 타임아웃을 두지 않아 연결 종료 감지가 다음 스케줄러 push 실패 시점에만 일어나, 최대 5분까지 좀비 커넥션이 남을 수 있습니다. 다시 한다면 15~30초 하트비트로 더 적극적으로 감지하고 싶습니다.</div>
+    </div>
+
+    <div class="ps-block">
+      <h3>로그아웃 후에도 기존 토큰으로 재인증 가능</h3>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">로그아웃 후에도 기존 액세스 토큰으로 API 호출이 성공하는 보안 문제가 있었습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">JWT는 stateless 구조라 발급 후 서버에서 즉시 무효화가 불가능했습니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">Redis에 token:version:{userId} 키로 유효한 토큰 버전을 저장하고, 매 요청마다 isLatestToken()으로 검증했습니다.</div></div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">Redis Token Version 검증으로 발급 이전 토큰 사용을 차단했습니다.</div></div>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Screenshots</span>
+    <h2>화면 캡처</h2>
+    <div class="shot-grid">
+      <figure>
+        <img src="assets/stars-shot-main.png" alt="STARS 메인 화면 — 지도 기반 실시간 혼잡 지역 확인">
+        <figcaption>실시간 혼잡도 지도</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/stars-shot-admin.png" alt="STARS 관리자 통합 화면 — 인구 혼잡 현황·사고 정보·전체 관광지 현황">
+        <figcaption>관리자 대시보드</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/stars-shot-chat.png" alt="STARS AI 여행 코스 추천 챗봇 화면">
+        <figcaption>AI 여행 추천</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Learnings</span>
+    <h2>배운 점</h2>
+    <div class="learnings">
+      <p>서비스를 나누는 작업 자체보다, User와 Place처럼 겹쳐 보이는 기능 사이에서 책임을 어디까지 나눌지 판단하는 게 더 어려웠습니다.</p>
+      <p>SSE에서는 예외가 안 나게 막는 것보다, 연결이 끊긴 뒤에 그걸 어떻게 회수하느냐가 더 중요하다는 걸 이번에 직접 겪었습니다.</p>
+      <p>처음에는 JWT만으로 인증을 끝내려 했지만, 로그아웃을 즉시 반영할 수 없다는 한계에 부딪혔습니다. Redis Token Version 방식을 적용하면서, Stateless 인증에도 서버 쪽 상태 관리가 필요한 순간이 있다는 걸 경험했습니다.</p>
+      <p>나중에 코드를 다시 보니, External Info와 Congestion 두 서비스가 각자 RestTemplate로 Elasticsearch에 직접 쿼리를 보내는 동일한 패턴을 독립적으로 구현하고 있었습니다. 공통 ES 클라이언트나 쿼리 빌더로 추출했다면 중복을 줄일 수 있었겠다는 아쉬움이 남습니다.</p>
+    </div>
+  </section>
+
+  <div class="detail-footer">
+    <a class="back-link" href="index.html#projects">← 포트폴리오로 돌아가기</a>
+    <div>© 2026 Yoonhwa Lee.</div>
+  </div>
+</main>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target);} });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el=>revealObserver.observe(el));
+</script>
+</body>
+</html>

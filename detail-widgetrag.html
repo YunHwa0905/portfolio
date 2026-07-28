@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WidgetRAG | 이윤화 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-name"><span class="mono">이</span>이윤화</div>
+    <div class="topbar-links"><a href="index.html#projects">← Projects</a></div>
+  </div>
+</div>
+
+<main>
+  <header class="article-header">
+    <div class="role hero-fade">Case Study</div>
+    <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">Backend</span><span class="tag">AI</span><span class="tag">RAG</span></div>
+    <h1 class="hero-fade-delay-1">WidgetRAG — B2B SaaS RAG 상품 추천 챗봇</h1>
+    <div class="a-period hero-fade-delay-2">2026.06.19 – 07.10 (약 3주, 6단계) · 팀 2명 (이윤화·홍채원) · 백엔드 / RAG 파이프라인 / 크롤링</div>
+    <blockquote class="hero-fade-delay-2">쇼핑몰마다 상담 인력 없이 실시간 상품 문의에 대응하기 어렵고, 범용 챗봇은 실제 상품 데이터를 반영하지 못해 엉뚱한 답변(환각)을 내는 문제에서 출발했습니다.</blockquote>
+  </header>
+
+  <section class="a-section reveal">
+    <span class="a-label">Overview</span>
+    <h2>프로젝트 개요</h2>
+    <p>상품 CSV 업로드만으로 상품 DB를 학습한 RAG 챗봇을 자동 생성하고, 검색된 상품 목록 안에서만 답변하도록 설계해 환각을 최소화한 것이 핵심 차별점입니다.</p>
+    <p>widget.js 한 줄 삽입으로 쇼핑몰에 즉시 설치되며, 66girls(~1,671건)·Daiso(~10,477건) 두 쇼핑몰을 하나의 엔진으로 동시 운영했습니다.</p>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Architecture</span>
+    <h2>아키텍처</h2>
+    <div class="arch-box">관리자 웹(Biz Admin) · 쇼핑몰 위젯(66girls·Daiso)
+  │  widget.js 한 줄 삽입 (REST/HTTP)
+  ▼
+Spring Boot 백엔드 (인증 · 상품 · RAG 오케스트레이션)
+  │
+  ├─ PostgreSQL   (company · member · product, companyId FK 격리)
+  └─ OpenSearch   (client_code 필터 · kNN, HNSW)
+        │
+        ▼
+Python AI 서버 (FastAPI · bge-m3 · Gemma/EXAONE, 로컬 GPU)
+
+RAG 파이프라인(8단계):
+① CSV 업로드→청킹  ② GPU 임베딩(bge-m3)  ③ OpenSearch 색인(client_code 격리)
+④ 질문 벡터화        ⑤ 필터+top-k 검색(k=3)  ⑥ 프롬프트 구성
+⑦ Gemma 응답 생성    ⑧ 응답 · Fallback(실패 시 목업 대체)</div>
+    <p style="margin-top:16px;">모든 테이블이 companyId(FK)로 연결되어 client_code 기준으로 논리적으로 완전히 격리됩니다. WSL 폴더 물리 격리, OpenSearch client_code 필터, PostgreSQL companyId(FK) 논리 격리로 멀티테넌시를 검증했습니다. 검색 결과 0건이거나 GPU 응답 지연·연결 실패 시에는 목업 응답으로 대체해, 실제 상품 없이 LLM이 지어내는 것을 원천 차단합니다.</p>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">My Role</span>
+    <h2>본인 역할</h2>
+    <ul class="role-list">
+      <li>Spring Boot 백엔드 설계·구현</li>
+      <li>RAG 파이프라인(임베딩·검색·프롬프트·Fallback) 전체 구현</li>
+      <li>데이터 크롤링·전처리 (Selenium·BeautifulSoup)</li>
+      <li>OpenSearch·AI 서버(FastAPI) 연동</li>
+      <li>서버 기술문서(모델정의서·테이블정의서) 작성</li>
+    </ul>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Problem Solving</span>
+    <h2>문제 해결 과정</h2>
+
+    <div class="ps-block">
+      <h3>업로드 파이프라인 병목 — 처리 시간 34분</h3>
+      <div class="ps-row"><div class="k">문제</div><div class="v">대량 상품 데이터를 업로드할 때 전체 처리 시간이 과도하게 길었습니다 (daiso ~10,477건 기준 약 34분).</div></div>
+      <div class="ps-row"><div class="k">원인</div><div class="v">임베딩 생성과 OpenSearch 색인 단계가 전체 처리시간의 95.8%를 차지하는 병목 구간으로 확인됐습니다.</div></div>
+      <div class="ps-row"><div class="k">해결</div><div class="v">업로드 파일을 청크 단위로 분할해 임베딩 요청을 병렬 처리하도록 파이프라인을 재설계했습니다.</div></div>
+      <div class="ps-row"><div class="k">결과</div><div class="v">동일 데이터셋 기준 총 처리시간을 34분에서 16분으로 약 52% 단축했습니다. 남은 과제는 대량 업로드 시 GPU 리소스 모니터링 체계 구축입니다.</div></div>
+    </div>
+
+    <div class="ps-block">
+      <h3>기타 트러블슈팅</h3>
+      <div class="ps-row"><div class="k">문제</div><div class="v">OpenSearch 문서 생성 시 Map.of()에 null 값이 포함되면 예외가 발생했고, 127.0.0.1/localhost 혼용 시 Origin 차이로 세션 쿠키 공유가 실패했으며, 정적 리소스 변경이 실제 서빙에 반영되지 않는 문제가 있었습니다.</div></div>
+      <div class="ps-row"><div class="k">해결</div><div class="v">null을 허용하는 HashMap으로 교체하고, Base URL 오리진을 통일했으며, target/classes/static이 실제 서빙 경로임을 확인해 mvn clean spring-boot:run 재빌드를 규칙화했습니다.</div></div>
+      <div class="ps-row"><div class="k">결과</div><div class="v">실데이터 검증 과정에서 CSV BOM, 중복 상품ID, 영문+숫자 혼합ID 등 노이즈 패턴을 조기에 발견해 파싱·정제 로직을 사전 보강했습니다.</div></div>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Metrics</span>
+    <h2>지표 &amp; 수치</h2>
+    <div class="metric-grid">
+      <div class="metric-card"><div class="m-num">52% 단축</div><div class="m-label">업로드 처리시간 34분 → 16분 (병렬화)</div></div>
+      <div class="metric-card"><div class="m-num">2개 쇼핑몰</div><div class="m-label">66girls(~1,671건)·Daiso(~10,477건) 동시 운영</div></div>
+      <div class="metric-card"><div class="m-num">top-k 3</div><div class="m-label">OpenSearch HNSW·cosine 기반 상품 검색</div></div>
+      <div class="metric-card"><div class="m-num">1024dim</div><div class="m-label">bge-m3 임베딩 벡터 차원</div></div>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Screenshots</span>
+    <h2>화면 캡처</h2>
+    <div class="shot-placeholder">화면 캡처 추가 예정 — 쇼핑몰 위젯 챗 UI, 관리자 콘솔 대시보드</div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Learnings</span>
+    <h2>배운 점</h2>
+    <div class="learnings">
+      <p>멀티테넌시 격리 아키텍처를 처음부터 설계한 경험을 얻었고, RAG·로컬 LLM 연동 파이프라인을 Spring Boot·FastAPI 서버 분리 구조로 직접 구축했습니다. 병목 구간을 수치로 확인하고 근거 기반으로 최적화하는 과정에서 성능 개선은 감이 아니라 측정에서 시작된다는 점을 체감했습니다. 이후 클라우드 인프라 전환(Docker Compose + AWS EC2 + CI/CD), AI 서빙 최적화(양자화), 품질보증 자동화를 다음 단계로 계획하고 있습니다.</p>
+    </div>
+  </section>
+
+  <div class="detail-footer">
+    <a class="back-link" href="index.html#projects">← 포트폴리오로 돌아가기</a>
+    <div>© 2026 Yoonhwa Lee.</div>
+  </div>
+</main>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target);} });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el=>revealObserver.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexAI | 이윤화 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-name"><span class="mono">이</span>이윤화</div>
+    <div class="topbar-links"><a href="index.html#projects">← Projects</a></div>
+  </div>
+</div>
+
+<main>
+  <header class="article-header">
+    <div class="role hero-fade">Case Study</div>
+    <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">AI</span><span class="tag">RAG</span><span class="tag">Backend</span></div>
+    <h1 class="hero-fade-delay-1">LexAI — 나이맞춤형 법률 AI 상담 서비스</h1>
+    <div class="a-period hero-fade-delay-2">2026.05.19 – 05.25 (1주, 1인 개발) · 기획·설계·구축·배포·테스트 전 과정 단독 수행</div>
+    <blockquote class="hero-fade-delay-2">법률 용어가 어려워 일반인의 법률 접근성이 낮고, 전문가 상담 비용 부담이 큰 문제를 해결하기 위해 나이대별 맞춤 법률 AI 상담 서비스를 개발했습니다.</blockquote>
+  </header>
+
+  <section class="a-section reveal">
+    <span class="a-label">Overview</span>
+    <h2>프로젝트 개요</h2>
+    <p>AIHub 원본 253,207건을 정제해 206,950건(18% 제거) 기반으로 RAG 검색을 구성하고, BM25(boost 2.0) + kNN 하이브리드 검색으로 정확도를 높였습니다. Gemma 3 4B를 Ollama로 서빙하고, 4단계 나이대별 맞춤 프롬프트를 JWT와 연동해 제공했습니다.</p>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Architecture</span>
+    <h2>아키텍처</h2>
+    <div class="arch-box">Frontend (Express)
+      │
+      ▼
+Spring (JWT 인증 · 나이 정보 전달)
+      │
+      ▼
+FastAPI (RAG 오케스트레이션)
+      │
+      ├─ OpenSearch  — BM25(boost 2.0) + kNN(k=5) 하이브리드 검색
+      └─ MySQL       — 사용자/세션 데이터
+      │
+      ▼
+Gemma 3 4B (Ollama, 4단계 나이대별 프롬프트)</div>
+    <p style="margin-top:16px;">3-Tier 구조로 프론트(Express) · 인증(Spring, JWT) · RAG(FastAPI) · 데이터(OpenSearch+MySQL)를 분리해 할루시네이션을 최소화하고 확장성을 확보했습니다. 1주라는 기한 내 분석·설계·구축·배포·테스트 전 과정을 1인이 완료했습니다.</p>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">My Role</span>
+    <h2>본인 역할</h2>
+    <ul class="role-list">
+      <li>서비스 기획부터 배포까지 전 과정 단독 수행</li>
+      <li>AIHub 원본 253,207건 정제 및 4개 법률 분야 재분류 → 206,950건 적재</li>
+      <li>BM25 + kNN 하이브리드 검색 로직 설계 및 구현</li>
+      <li>4단계 나이대별 프롬프트 분기 로직 설계 (JWT 연동)</li>
+      <li>Gemma 3 4B 로컬 서빙(Ollama) 환경 구축</li>
+    </ul>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Problem Solving</span>
+    <h2>문제 해결 과정</h2>
+
+    <div class="ps-block">
+      <h3>검색 정확도 — BM25와 kNN 단독의 한계</h3>
+      <div class="ps-row"><div class="k">문제</div><div class="v">BM25 단독은 "해약 절차"↔"계약 해지" 같은 유사 표현을 찾지 못했고, kNN 단독은 법률 용어의 정확한 매칭이 떨어졌습니다.</div></div>
+      <div class="ps-row"><div class="k">해결</div><div class="v">bool.should = [ multi_match(boost=2.0), knn(vector, k=5) ] 구조로 BM25 키워드 정확도를 우선하고 kNN으로 의미 검색을 보완했습니다.</div></div>
+      <div class="ps-row"><div class="k">결과</div><div class="v">206,950건(4개 법률 분야)에서 키워드·의미 검색을 동시에 확보하는 최종 방식으로 채택했습니다.</div></div>
+    </div>
+
+    <div class="ps-block">
+      <h3>나이대별 프롬프트 분기</h3>
+      <div class="ps-row"><div class="k">문제</div><div class="v">같은 질문이라도 초등학생과 전문가가 원하는 답변 수준은 달라, 단일 프롬프트로는 두 요구를 동시에 만족시킬 수 없었습니다.</div></div>
+      <div class="ps-row"><div class="k">해결</div><div class="v">~10세 / 11~19세 / 20~40세 / 41세~ 4단계로 나이대를 구분해 프롬프트 특성(쉬운 단어·비유 ↔ 판례 비교·전문 용어)을 차등화하고, JWT에 나이 정보를 담아 로그인 시점부터 전달했습니다.</div></div>
+      <div class="ps-row"><div class="k">결과</div><div class="v">동일 질문에 대해 4단계 응답 스타일이 실제로 구분되어 생성되는 것을 확인했습니다.</div></div>
+    </div>
+
+    <div class="ps-block">
+      <h3>기술적 의사결정 — EXAONE 파인튜닝을 포기한 이유</h3>
+      <div class="ps-row"><div class="k">문제</div><div class="v">QLoRA 파인튜닝 → Base+LoRA 병합 → GGUF 변환(llama.cpp) → Ollama 등록까지, 1주 기한의 1인 프로젝트에서 단계마다 다른 이유로 막혔습니다 (layer_norm_rms_epsilon key not found, token_embd.weight missing, 비정상 GGUF 파일 등 6가지 문제).</div></div>
+      <div class="ps-row"><div class="k">해결</div><div class="v">6가지 문제를 블로커(모델 자체를 못 띄우는 문제)와 환경 잡음(C드라이브 용량, Windows 호환성 등)으로 구분해 우선순위를 잃지 않고 대응, 모두 해결해 GGUF는 정상 로드·실행됐습니다.</div></div>
+      <div class="ps-row"><div class="k">결과</div><div class="v">그러나 파인튜닝 데이터 부족(약 4천 건)과 아키텍처 패치로 인한 응답 품질 저하로 실서비스 수준에는 미치지 못한다고 판단, 기한 안에서 이미 검증된 base 모델(Gemma 3 4B)로 방향을 전환했습니다.</div></div>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Metrics</span>
+    <h2>지표 &amp; 수치</h2>
+    <div class="metric-grid">
+      <div class="metric-card"><div class="m-num">253,207 → 206,950건</div><div class="m-label">데이터 정제 (약 18% 제거)</div></div>
+      <div class="metric-card"><div class="m-num">boost 2.0 · k=5</div><div class="m-label">BM25 + kNN 하이브리드 검색 파라미터</div></div>
+      <div class="metric-card"><div class="m-num">4단계 프롬프트</div><div class="m-label">나이대별 맞춤 응답 분기</div></div>
+      <div class="metric-card"><div class="m-num">6가지 블로커</div><div class="m-label">EXAONE 파인튜닝 과정에서 해결한 기술 문제</div></div>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Screenshots</span>
+    <h2>화면 캡처</h2>
+    <div class="shot-placeholder">화면 캡처 추가 예정 — 상담 채팅 화면, 나이대별 응답 비교</div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Learnings</span>
+    <h2>배운 점</h2>
+    <div class="learnings">
+      <p>6개 문제를 블로커/환경잡음으로 구분해 우선순위를 잃지 않고 대응한 경험, 그리고 기한 안에서 근거 기반으로 기술 방향을 전환한 의사결정 경험을 얻었습니다. "GGUF를 실행 가능하게 만드는 것"과 "서비스에 쓸 수 있는 품질을 확보하는 것"은 별개의 문제라는 점을 체감했습니다. 남은 한계로는 응답 속도(LLM 추론 지연, 경량화·캐싱 필요), 대화 내역 미저장, OpenSearch 보안 미설정(개발환경 한정)이 있습니다.</p>
+    </div>
+  </section>
+
+  <div class="detail-footer">
+    <a class="back-link" href="index.html#projects">← 포트폴리오로 돌아가기</a>
+    <div>© 2026 Yoonhwa Lee.</div>
+  </div>
+</main>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target);} });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el=>revealObserver.observe(el));
+</script>
+</body>
+</html>

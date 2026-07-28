@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAWA | 이윤화 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="topbar detail-wide">
+  <div class="topbar-inner">
+    <div class="topbar-name"><span class="mono">이</span>이윤화</div>
+    <div class="topbar-links"><a href="index.html#projects">← Projects</a></div>
+  </div>
+</div>
+
+<main class="detail-main">
+  <header class="article-header">
+    <div class="role hero-fade">Case Study</div>
+    <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">AI</span><span class="tag">Voice AI</span><span class="tag">DevOps</span></div>
+    <h1 class="hero-fade-delay-1">WAWA — GPT-4 + 음성 클로닝 발음 교정 앱</h1>
+    <div class="a-period hero-fade-delay-2">2025.08.05 – 2025.11.03 (90일) · 팀 5명 (FE 1 · BE 3 · AI 1) · AI + DevOps</div>
+    <blockquote class="hero-fade-delay-2">GPT-4와 음성 클로닝으로 사용자 목소리 그대로 발음을 교정하는 AI 학습 앱입니다.</blockquote>
+    <div class="hero-cta hero-fade-delay-2" style="margin-top:20px;">
+      <a class="hero-btn primary" href="https://github.com/WAWA-GP/AI_WAWA" target="_blank" rel="noopener">GitHub <span class="arrow">→</span></a>
+      <a class="hero-btn" href="#demo">Demo <span class="arrow">→</span></a>
+    </div>
+  </header>
+
+  <section class="a-section reveal">
+    <span class="a-label">Overview</span>
+    <h2>프로젝트 개요</h2>
+    <div class="ps-row"><div class="k">Problem</div><div class="v">외국어 발음을 교정하려면 정확히 어디가 왜 틀렸는지 알아야 하지만, 대부분의 학습 앱은 정답 여부만 알려줄 뿐 개인별 발음 피드백을 주지 못합니다.</div></div>
+    <div class="ps-row"><div class="k">Solution</div><div class="v">사용자 음성을 5개 지표로 분석하고, ElevenLabs 음성 클로닝으로 '교정된 내 목소리' 가이드를 제공하며, GPT-4 기반 실시간 대화로 A1~C2 맞춤 학습을 지원하는 AI 발음 교정 앱을 개발했습니다.</div></div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Project Highlights</span>
+    <h2>핵심 성과</h2>
+    <ul class="role-check">
+      <li><span class="check">✔</span> AI 파트 전체 설계 및 구현 (OpenAI GPT-4/Whisper/TTS, ElevenLabs 연동)</li>
+      <li><span class="check">✔</span> librosa·parselmouth 기반 5지표 발음 분석 엔진 직접 설계</li>
+      <li><span class="check">✔</span> AWS EC2 + GitHub Actions CI/CD로 배포 시간 80% 단축 (15분 → 3분)</li>
+    </ul>
+  </section>
+
+  <section class="a-section reveal" id="demo">
+    <span class="a-label">Demo</span>
+    <h2>시연 영상</h2>
+    <video class="diagram-svg" controls preload="metadata">
+      <source src="assets/wawa-demo.mp4" type="video/mp4">
+      브라우저가 video 태그를 지원하지 않습니다. <a href="assets/wawa-demo.mp4">영상 다운로드</a>
+    </video>
+    <p class="code-note">영상 파일을 <code>assets/wawa-demo.mp4</code> 경로에 넣어주시면 바로 재생됩니다.</p>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Architecture</span>
+    <h2>아키텍처</h2>
+    <ul class="role-list">
+      <li>AI 서버(FastAPI, :8000)와 백엔드 서버(FastAPI, :8001)를 포트로 분리해 AWS EC2(t3.medium) 한 대에 배포</li>
+      <li>각 서버를 systemd 서비스(ai.service·backend.service)로 등록해 프로세스 관리 및 자동 재시작 구성</li>
+      <li>GitHub Actions로 저장소별(AI_WAWA: main, BackEnd_WAWA: master) 독립 배포 파이프라인 구축</li>
+      <li>Flutter 프론트엔드가 두 서버에 각각 요청 (S3 배포 예정)</li>
+    </ul>
+    <svg class="diagram-svg" viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" style="margin-top:14px;">
+      <defs>
+        <marker id="arrow3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/>
+        </marker>
+      </defs>
+
+      <rect x="20" y="20" width="150" height="40" rx="6" fill="#171a1f"/>
+      <text x="95" y="45" text-anchor="middle" fill="#fff" font-size="12.5" font-family="Pretendard, sans-serif" font-weight="700">Flutter App</text>
+
+      <rect x="20" y="100" width="150" height="40" rx="6" fill="#f6f4ef" stroke="#b3924f" stroke-width="1.5"/>
+      <text x="95" y="118" text-anchor="middle" fill="#171a1f" font-size="11.5" font-family="Pretendard, sans-serif" font-weight="700">GitHub Actions</text>
+      <text x="95" y="132" text-anchor="middle" fill="#171a1f" font-size="9.5" font-family="Pretendard, sans-serif">CI/CD</text>
+
+      <line x1="95" y1="60" x2="95" y2="96" stroke="#8a8f99" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrow3)"/>
+      <line x1="170" y1="120" x2="230" y2="120" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow3)"/>
+
+      <rect x="230" y="60" width="440" height="150" rx="8" fill="none" stroke="#e3e0d8" stroke-width="1.5"/>
+      <text x="250" y="80" fill="#8a8f99" font-size="11" font-family="Pretendard, sans-serif" font-weight="700">AWS EC2 (t3.medium)</text>
+
+      <rect x="250" y="95" width="180" height="90" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
+      <text x="340" y="125" text-anchor="middle" fill="#1b64da" font-size="13" font-family="Pretendard, sans-serif" font-weight="700">AI Server</text>
+      <text x="340" y="145" text-anchor="middle" fill="#1b64da" font-size="11" font-family="Pretendard, sans-serif">FastAPI + OpenAI</text>
+      <text x="340" y="163" text-anchor="middle" fill="#1b64da" font-size="11" font-family="Pretendard, sans-serif">:8000 (ai.service)</text>
+
+      <rect x="460" y="95" width="180" height="90" rx="6" fill="#f2f2f0" stroke="#c8cad0" stroke-width="1.5"/>
+      <text x="550" y="125" text-anchor="middle" fill="#9aa0a8" font-size="13" font-family="Pretendard, sans-serif" font-weight="700">Backend Server</text>
+      <text x="550" y="145" text-anchor="middle" fill="#9aa0a8" font-size="11" font-family="Pretendard, sans-serif">FastAPI (팀원 담당)</text>
+      <text x="550" y="163" text-anchor="middle" fill="#9aa0a8" font-size="11" font-family="Pretendard, sans-serif">:8001 (backend.service)</text>
+    </svg>
+    <p class="code-note" style="margin-top:10px;">파란색(AI Server)이 직접 설계·배포한 영역입니다. Backend Server는 팀원 담당이며, 인프라(EC2·systemd·CI/CD) 구축은 두 서버 공통으로 담당했습니다.</p>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">My Role</span>
+    <h2>본인 역할</h2>
+    <div class="role-split">
+      <h3>핵심 기여</h3>
+      <ul class="role-check">
+        <li><span class="check">✔</span> AI 서비스 통합 API 개발 — OpenAI(GPT-4 대화·Whisper STT·TTS 합성), ElevenLabs Voice Cloning</li>
+        <li><span class="check">✔</span> librosa(MFCC) + parselmouth(Pitch) 기반 발음 분석 엔진 설계 (5지표, 0-100점)</li>
+        <li><span class="check">✔</span> AWS EC2 인프라 구축 (t3.medium, systemd 기반 서비스 관리)</li>
+        <li><span class="check">✔</span> GitHub Actions CI/CD 파이프라인 구축 — 배포 시간 15분 → 3분 (80% 단축)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Tech Stack</span>
+    <h2>기술 스택</h2>
+    <div class="tech-pill-row">
+      <span class="skill-pill">FastAPI</span>
+      <span class="skill-pill">OpenAI (GPT-4·Whisper·TTS)</span>
+      <span class="skill-pill">ElevenLabs</span>
+      <span class="skill-pill">librosa</span>
+      <span class="skill-pill">parselmouth</span>
+      <span class="skill-pill">Supabase</span>
+      <span class="skill-pill">AWS EC2</span>
+      <span class="skill-pill">GitHub Actions</span>
+      <span class="skill-pill">systemd</span>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Problem Solving</span>
+    <h2>문제 해결 과정</h2>
+
+    <div class="ps-block">
+      <h3>systemd 서비스 반복 실패 (Active: failed)</h3>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">AI 서버의 systemd 서비스가 배포 후 반복적으로 Active: failed 상태에 빠졌습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">WorkingDirectory·ExecStart의 경로 설정이 실제 가상환경·엔트리포인트 위치와 어긋나 있었습니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">sudo journalctl -u ai.service -n 50 --no-pager로 로그를 확인해 원인을 좁힌 뒤, WorkingDirectory와 ExecStart 경로를 실제 배포 구조에 맞게 수정했습니다.</div></div>
+      <div class="code-block" style="margin:4px 0 14px;">[Service]
+WorkingDirectory=/app/ai_server/app
+Environment="PATH=/app/ai_server/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/app/ai_server/venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=3</div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">재부팅·배포 이후에도 AI 서버가 안정적으로 자동 기동하도록 정리했습니다.</div></div>
+    </div>
+
+    <div class="ps-block">
+      <h3>GitHub Actions SSH 연결 실패 (Permission denied)</h3>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">배포 파이프라인에서 Permission denied (publickey) 오류로 EC2 SSH 연결이 계속 실패했습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">EC2_SSH_KEY Secret에 .pem 키가 일부만 등록되어 있었습니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">.pem 파일 전체 내용을 BEGIN~END까지 포함해 복사하고, 앞뒤 공백 없이 GitHub Secrets에 다시 등록했습니다.</div></div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">GitHub Actions → SSH → git pull → systemctl restart 파이프라인이 안정적으로 동작해 배포 시간을 15분에서 3분으로 단축했습니다.</div></div>
+    </div>
+
+    <p style="margin-top:8px; color:var(--ink-soft); font-size:14.5px;"><b style="color:var(--ink-faint); font-size:12px; letter-spacing:.04em; text-transform:uppercase;">그 외 해결한 문제들 —</b><br>
+    Python 3.12에서 numpy 1.24.3 호환 오류(pkgutil.ImpImporter) → numpy 1.26 이상으로 업그레이드해 해결.<br>
+    pyttsx3가 요구하는 espeak 라이브러리 부재 → apt로 espeak·libespeak1 설치.<br>
+    .env 값 뒤에 붙인 주석이 파싱 에러(ValueError)를 유발 → 값 뒤 주석 제거로 해결.<br>
+    requirements.txt에 Git 충돌 마커가 남아 설치 실패 → sed로 충돌 마커 제거.</p>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Learnings</span>
+    <h2>배운 점</h2>
+    <div class="learnings">
+      <p>서비스가 죽었을 때 무작정 재시작하기보다, journalctl로 로그를 먼저 들여다보는 습관이 문제 해결 속도를 크게 좌우한다는 걸 체감했습니다.</p>
+      <p>CI/CD를 직접 구축해보니, 자동화의 가치는 속도 자체보다 "매번 같은 방식으로 배포된다"는 반복 가능성에 있다는 걸 알게 됐습니다.</p>
+      <p>.env 값 뒤에 붙인 주석 하나로 배포가 통째로 실패하는 걸 겪으면서, 환경변수 관리처럼 사소해 보이는 부분이 실제 운영에서는 가장 먼저 발목을 잡을 수 있다는 걸 배웠습니다.</p>
+    </div>
+  </section>
+
+  <div class="detail-footer">
+    <a class="back-link" href="index.html#projects">← 포트폴리오로 돌아가기</a>
+    <div>© 2026 Yoonhwa Lee.</div>
+  </div>
+</main>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target);} });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el=>revealObserver.observe(el));
+</script>
+</body>
+</html>

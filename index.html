@@ -65,7 +65,7 @@
       <div class="skill-compact">
         <div class="cat">Backend</div>
         <div class="pill-row">
-          <span class="skill-pill">Java</span>
+          <span class="skill-pill">Java 17</span>
           <span class="skill-pill">Spring Boot</span>
           <span class="skill-pill">MSA (Spring Cloud Gateway)</span>
           <span class="skill-pill">JPA</span>
@@ -99,32 +99,29 @@
     <span class="section-label">Journey</span>
     <h2>Timeline</h2>
     <div class="tl-row">
-      <div class="tl-date">2022.03 ~ 2026.02</div>
+      <div class="tl-date">2022.03</div>
       <div class="tl-content">
-        <div class="tl-title">소프트웨어융합학과</div>
-        <div class="tl-desc">신한대학교 </div>
+        <div class="tl-title">소프트웨어융합학과 입학</div>
+        <div class="tl-desc">2026.02 졸업</div>
       </div>
     </div>
     <div class="tl-row">
       <div class="tl-date">2024.12 ~ 2025.06</div>
       <div class="tl-content">
         <div class="tl-title">SK Shieldus Rookies 2기</div>
-        <div class="tl-desc">지능형 애플리케이션 개발자 양성 과정(960시간) <br>— React → Spring Boot MSA → AWS·Docker → FastAPI·LLM → GitHub Actions</div>
+        <div class="tl-desc">지능형 애플리케이션 개발자 양성 과정(960시간) — React → Spring Boot MSA → AWS·Docker → FastAPI·LLM → GitHub Actions</div>
       </div>
     </div>
     <div class="tl-row">
       <div class="tl-date">2025.10.21</div>
       <div class="tl-content">
         <div class="tl-title">교내 앱 기획 공모전 최우수상</div>
-        <div class="tl-desc">사용자 간 연결을 돕는 커뮤니티 앱 'Onnection' 기획<br> — 아이디어 발굴부터 타겟 분석, 시나리오 작성, UI 설계까지 단독 수행</div>
+        <div class="tl-desc">사용자 간 연결을 돕는 커뮤니티 앱 'Onnection' 기획 — 아이디어 발굴부터 타겟 분석, 시나리오 작성, UI 설계까지 단독 수행</div>
       </div>
     </div>
     <div class="tl-row">
       <div class="tl-date">2026.03 ~ 현재</div>
-      <div class="tl-content">
-        <div class="tl-title">스마트금융과</div>
-        <div class="tl-desc">한국폴리텍대학 </div>
-      </div>
+      <div class="tl-content"><div class="tl-title">한국폴리텍대학 스마트금융과</div></div>
     </div>
     <div class="tl-row">
       <div class="tl-date">2026.03</div>
@@ -189,7 +186,7 @@
       <blockquote>GPT-4와 음성 클로닝으로 '교정된 내 목소리' 가이드를 제공하는 발음 교정 앱</blockquote>
       <div class="p-meta">AI · DevOps · Team 5</div>
       <ul class="check-list">
-        <li><span class="check">✔</span> CI/CD 자동화로 배포 시간 80% 단축</li>
+        <li><span class="check">✔</span> GitHub Actions로 수동 배포 과정을 자동화</li>
         <li><span class="check">✔</span> 5지표 발음 분석 엔진 직접 설계</li>
       </ul>
       <div class="p-stack">FastAPI · OpenAI(GPT-4/Whisper) · ElevenLabs <span class="stack-more">+ librosa · AWS EC2</span></div>
@@ -260,6 +257,7 @@
 </main>
 
 <script>
+  window.addEventListener('load', () => { window.scrollTo(0, 0); });
   const revealEls = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{

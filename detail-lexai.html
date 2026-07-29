@@ -32,19 +32,26 @@
   <section class="a-section reveal">
     <span class="a-label">Screenshots</span>
     <h2>화면 캡처</h2>
-    <div class="shot-grid">
-      <figure>
-        <img src="assets/lexai-shot-kids.png" alt="LexAI 초등학생 눈높이 설명 화면 — 강제집행 질문에 대한 쉬운 답변">
-        <figcaption>초등학생 눈높이 설명</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/lexai-shot-expert.png" alt="LexAI 전문가 눈높이 설명 화면 — 같은 질문에 법령·판례 인용 답변">
-        <figcaption>전문가 눈높이 설명</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/lexai-shot-signup.png" alt="LexAI 회원가입 화면 — 나이 입력으로 맞춤 설명 설정">
-        <figcaption>회원가입 (나이 기반 맞춤 설정)</figcaption>
-      </figure>
+    <div class="shot-carousel" data-autoplay="4000">
+      <div class="shot-carousel-viewport">
+        <div class="shot-carousel-track">
+          <figure class="shot-carousel-slide">
+            <img src="assets/lexai-shot-kids.png" alt="LexAI 초등학생 눈높이 설명 화면 — 강제집행 질문에 대한 쉬운 답변">
+            <figcaption>초등학생 눈높이 설명</figcaption>
+          </figure>
+          <figure class="shot-carousel-slide">
+            <img src="assets/lexai-shot-expert.png" alt="LexAI 전문가 눈높이 설명 화면 — 같은 질문에 법령·판례 인용 답변">
+            <figcaption>전문가 눈높이 설명</figcaption>
+          </figure>
+          <figure class="shot-carousel-slide">
+            <img src="assets/lexai-shot-signup.png" alt="LexAI 회원가입 화면 — 나이 입력으로 맞춤 설명 설정">
+            <figcaption>회원가입 (나이 기반 맞춤 설정)</figcaption>
+          </figure>
+        </div>
+      </div>
+      <button class="shot-carousel-btn prev" aria-label="이전 화면">‹</button>
+      <button class="shot-carousel-btn next" aria-label="다음 화면">›</button>
+      <div class="shot-carousel-dots"></div>
     </div>
   </section>
 
@@ -201,6 +208,32 @@ PARAMETER repeat_penalty 1.1</div>
     entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target);} });
   }, { threshold: 0.1 });
   revealEls.forEach(el=>revealObserver.observe(el));
+
+  document.querySelectorAll('.shot-carousel').forEach(carousel=>{
+    const track = carousel.querySelector('.shot-carousel-track');
+    const slides = carousel.querySelectorAll('.shot-carousel-slide');
+    const dotsWrap = carousel.querySelector('.shot-carousel-dots');
+    let index = 0;
+    slides.forEach((_, i)=>{
+      const dot = document.createElement('button');
+      dot.className = 'shot-carousel-dot' + (i===0 ? ' active' : '');
+      dot.setAttribute('aria-label', (i+1)+'번째 화면');
+      dot.addEventListener('click', ()=>goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('.shot-carousel-dot');
+    function goTo(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (index*100) + '%)';
+      dots.forEach((d,di)=>d.classList.toggle('active', di===index));
+    }
+    carousel.querySelector('.prev').addEventListener('click', ()=>goTo(index-1));
+    carousel.querySelector('.next').addEventListener('click', ()=>goTo(index+1));
+    const autoplayMs = parseInt(carousel.dataset.autoplay || '4000', 10);
+    let timer = setInterval(()=>goTo(index+1), autoplayMs);
+    carousel.addEventListener('mouseenter', ()=>clearInterval(timer));
+    carousel.addEventListener('mouseleave', ()=>{ timer = setInterval(()=>goTo(index+1), autoplayMs); });
+  });
 </script>
 </body>
 </html>

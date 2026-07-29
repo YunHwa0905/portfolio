@@ -81,7 +81,7 @@
       <li>Oracle Cloud(Ubuntu 24.04) 한 대에 Frontend(3000)·Spring(8181)·FastAPI(8000)·OpenSearch(9200)·Ollama(11434)·MySQL(3306)을 포트로 분리 배포</li>
       <li>OpenSearch legal_documents 인덱스(text·source·embedding 필드)에서 kNN과 BM25를 각각 별도 쿼리로 실행한 뒤, 점수를 max 정규화하여 가중 합산(kNN 1.0 : BM25 0.5)하는 하이브리드 검색</li>
       <li>MySQL users 테이블의 age를 JWT에 담아 FastAPI로 전달, 설명 난이도 4단계로 분기</li>
-      <li>Spring Boot(JPA·Security) 버전과 Spring Legacy(MyBatis·수동 Filter) 버전을 각각 구현해 비교</li>
+      <li>Spring Boot(JPA·Security)로 먼저 구현한 뒤, 구조를 더 확실히 이해하기 위해 Spring Legacy(MyBatis·수동 Filter)로 다시 구현</li>
     </ul>
     <svg class="diagram-svg" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="margin-top:14px;">
       <defs>
@@ -126,7 +126,7 @@
         <li><span class="check">✔</span> AIHub 법률 문서 253,207건 전처리 및 4개 분야(민사·형사·행정·지식재산권법) 매핑, OpenSearch 인덱싱</li>
         <li><span class="check">✔</span> kNN + BM25 하이브리드 검색 설계·구현, 검색 결과가 없거나 유사도가 낮으면 LLM을 호출하지 않고 안내 문구로 대체하는 환각 방지 로직 구현</li>
         <li><span class="check">✔</span> JWT 기반 인증 및 설명 난이도 4단계 분기 구현 (문맥 길이 차등 포함)</li>
-        <li><span class="check">✔</span> Spring Boot(JPA·Security)와 Spring Legacy(MyBatis) 두 버전을 각각 구현 — JwtFilter·CORS 필터 직접 작성</li>
+        <li><span class="check">✔</span> Spring Boot(JPA·Security)로 먼저 구현 후, 구조를 확실히 이해하기 위해 Spring Legacy(MyBatis)로 다시 구현 — JwtFilter·CORS 필터 직접 작성</li>
         <li><span class="check">✔</span> EXAONE 3.5 파인튜닝을 시도했다가 품질 미달로 Gemma 3 4B(로컬 GGUF)로 전환하는 기술적 의사결정</li>
       </ul>
     </div>

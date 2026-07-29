@@ -10,57 +10,138 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="topbar">
+<div class="topbar detail-wide">
   <div class="topbar-inner">
     <div class="topbar-name"><span class="mono">이</span>이윤화</div>
     <div class="topbar-links"><a href="index.html#projects">← Projects</a></div>
   </div>
 </div>
 
-<main>
+<main class="detail-main">
   <header class="article-header">
     <div class="role hero-fade">Case Study</div>
-    <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">AI</span><span class="tag">RAG</span><span class="tag">Backend</span></div>
+    <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">AI</span><span class="tag">RAG</span><span class="tag">LLM Serving</span><span class="tag">Backend</span></div>
     <h1 class="hero-fade-delay-1">LexAI — 나이맞춤형 법률 AI 상담 서비스</h1>
-    <div class="a-period hero-fade-delay-2">2026.05.19 – 05.25 (1주, 1인 개발) · 기획·설계·구축·배포·테스트 전 과정 단독 수행</div>
-    <blockquote class="hero-fade-delay-2">법률 용어가 어려워 일반인의 법률 접근성이 낮고, 전문가 상담 비용 부담이 큰 문제를 해결하기 위해 나이대별 맞춤 법률 AI 상담 서비스를 개발했습니다.</blockquote>
+    <div class="a-period hero-fade-delay-2">2026.05.19 – 2026.05.25 (7일) · 1인 프로젝트 · 기획·설계·구축·배포·동작 확인까지 전 과정 단독 수행</div>
+    <blockquote class="hero-fade-delay-2">나이대별로 맞춤 응답을 제공하는 RAG 기반 법률 AI 상담 서비스입니다.</blockquote>
+    <div class="hero-cta hero-fade-delay-2" style="margin-top:20px;">
+      <a class="hero-btn primary" href="https://github.com/YunHwa0905/legal-rag-chatbot" target="_blank" rel="noopener">GitHub <span class="arrow">→</span></a>
+    </div>
   </header>
+
+  <section class="a-section reveal">
+    <span class="a-label">Screenshots</span>
+    <h2>화면 캡처</h2>
+    <div class="shot-grid">
+      <figure>
+        <img src="assets/lexai-shot-kids.png" alt="LexAI 초등학생 눈높이 설명 화면 — 강제집행 질문에 대한 쉬운 답변">
+        <figcaption>초등학생 눈높이 설명</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/lexai-shot-expert.png" alt="LexAI 전문가 눈높이 설명 화면 — 같은 질문에 법령·판례 인용 답변">
+        <figcaption>전문가 눈높이 설명</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/lexai-shot-signup.png" alt="LexAI 회원가입 화면 — 나이 입력으로 맞춤 설명 설정">
+        <figcaption>회원가입 (나이 기반 맞춤 설정)</figcaption>
+      </figure>
+    </div>
+  </section>
 
   <section class="a-section reveal">
     <span class="a-label">Overview</span>
     <h2>프로젝트 개요</h2>
-    <p>AIHub 원본 253,207건을 정제해 206,950건(18% 제거) 기반으로 RAG 검색을 구성하고, BM25(boost 2.0) + kNN 하이브리드 검색으로 정확도를 높였습니다. Gemma 3 4B를 Ollama로 서빙하고, 4단계 나이대별 맞춤 프롬프트를 JWT와 연동해 제공했습니다.</p>
+    <div class="ps-row"><div class="k">Problem</div><div class="v">법률 용어가 어려워 일반인의 법률 접근성이 낮고, 전문가 상담 비용 부담이 크다는 문제에서 출발했습니다.</div></div>
+    <div class="ps-row"><div class="k">Solution</div><div class="v">AIHub 법률 문서(법령·판결문·유권해석·결정례·심결문) 253,207건을 전처리해 OpenSearch 기반 RAG 검색을 구성하고, 가입 시 입력한 나이로 설명 난이도 4단계를 기본 설정해 눈높이에 맞는 답변을 제공하는 법률 AI 상담 서비스를 개발했습니다.</div></div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Project Highlights</span>
+    <h2>핵심 성과</h2>
+    <ul class="role-check">
+      <li><span class="check">✔</span> 1인으로 요구사항정의부터 배포·동작 확인까지 전 과정 수행 (1주, 7일)</li>
+      <li><span class="check">✔</span> AIHub 법률 문서 253,207건을 전처리해 OpenSearch RAG 검색 구축</li>
+      <li><span class="check">✔</span> kNN + BM25 하이브리드 검색 구현 (가중치 kNN 1.0 : BM25 0.5)</li>
+      <li><span class="check">✔</span> 설명 난이도 4단계 프롬프트 설계 (문맥 길이 300~1500자 차등)</li>
+    </ul>
   </section>
 
   <section class="a-section reveal">
     <span class="a-label">Architecture</span>
     <h2>아키텍처</h2>
-    <div class="arch-box">Frontend (Express)
-      │
-      ▼
-Spring (JWT 인증 · 나이 정보 전달)
-      │
-      ▼
-FastAPI (RAG 오케스트레이션)
-      │
-      ├─ OpenSearch  — BM25(boost 2.0) + kNN(k=5) 하이브리드 검색
-      └─ MySQL       — 사용자/세션 데이터
-      │
-      ▼
-Gemma 3 4B (Ollama, 4단계 나이대별 프롬프트)</div>
-    <p style="margin-top:16px;">3-Tier 구조로 프론트(Express) · 인증(Spring, JWT) · RAG(FastAPI) · 데이터(OpenSearch+MySQL)를 분리해 할루시네이션을 최소화하고 확장성을 확보했습니다. 1주라는 기한 내 분석·설계·구축·배포·테스트 전 과정을 1인이 완료했습니다.</p>
+    <ul class="role-list">
+      <li>3-Tier 구조: Express(Frontend) → Spring(JWT 인증) → FastAPI(RAG 검색·추론) → OpenSearch + MySQL</li>
+      <li>Oracle Cloud(Ubuntu 24.04) 한 대에 Frontend(3000)·Spring(8181)·FastAPI(8000)·OpenSearch(9200)·Ollama(11434)·MySQL(3306)을 포트로 분리 배포</li>
+      <li>OpenSearch legal_documents 인덱스(text·source·embedding 필드)에서 kNN과 BM25를 각각 별도 쿼리로 실행한 뒤, 점수를 max 정규화하여 가중 합산(kNN 1.0 : BM25 0.5)하는 하이브리드 검색</li>
+      <li>MySQL users 테이블의 age를 JWT에 담아 FastAPI로 전달, 설명 난이도 4단계로 분기</li>
+      <li>Spring Boot(JPA·Security) 버전과 Spring Legacy(MyBatis·수동 Filter) 버전을 각각 구현해 비교</li>
+    </ul>
+    <svg class="diagram-svg" viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" style="margin-top:14px;">
+      <defs>
+        <marker id="arrow5" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/>
+        </marker>
+      </defs>
+
+      <rect x="270" y="16" width="160" height="42" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
+      <text x="350" y="42" text-anchor="middle" fill="#1b64da" font-size="12.5" font-family="Pretendard, sans-serif" font-weight="700">Express (Frontend)</text>
+      <line x1="350" y1="58" x2="350" y2="84" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow5)"/>
+
+      <rect x="250" y="86" width="200" height="42" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
+      <text x="350" y="112" text-anchor="middle" fill="#1b64da" font-size="12.5" font-family="Pretendard, sans-serif" font-weight="700">Spring (JWT 인증)</text>
+      <line x1="350" y1="128" x2="350" y2="154" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow5)"/>
+
+      <rect x="230" y="156" width="240" height="42" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
+      <text x="350" y="182" text-anchor="middle" fill="#1b64da" font-size="12.5" font-family="Pretendard, sans-serif" font-weight="700">FastAPI (RAG 검색·추론)</text>
+
+      <line x1="290" y1="198" x2="210" y2="236" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow5)"/>
+      <line x1="350" y1="198" x2="350" y2="236" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow5)"/>
+      <line x1="410" y1="198" x2="490" y2="236" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow5)"/>
+
+      <rect x="110" y="238" width="180" height="42" rx="6" fill="#1f3a5f"/>
+      <text x="200" y="264" text-anchor="middle" fill="#f5efe1" font-size="11.5" font-family="Pretendard, sans-serif" font-weight="700">OpenSearch (하이브리드 검색)</text>
+
+      <rect x="300" y="238" width="120" height="42" rx="6" fill="#1f3a5f"/>
+      <text x="360" y="264" text-anchor="middle" fill="#f5efe1" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">MySQL</text>
+
+      <rect x="430" y="238" width="150" height="42" rx="6" fill="#1f3a5f"/>
+      <text x="505" y="264" text-anchor="middle" fill="#f5efe1" font-size="11.5" font-family="Pretendard, sans-serif" font-weight="700">Ollama (Gemma 3 4B)</text>
+    </svg>
   </section>
 
   <section class="a-section reveal">
     <span class="a-label">My Role</span>
     <h2>본인 역할</h2>
-    <ul class="role-list">
-      <li>서비스 기획부터 배포까지 전 과정 단독 수행</li>
-      <li>AIHub 원본 253,207건 정제 및 4개 법률 분야 재분류 → 206,950건 적재</li>
-      <li>BM25 + kNN 하이브리드 검색 로직 설계 및 구현</li>
-      <li>4단계 나이대별 프롬프트 분기 로직 설계 (JWT 연동)</li>
-      <li>Gemma 3 4B 로컬 서빙(Ollama) 환경 구축</li>
-    </ul>
+    <div class="role-split">
+      <h3>핵심 기여</h3>
+      <ul class="role-check">
+        <li><span class="check">✔</span> 요구사항정의부터 배포·동작 확인까지 전 과정 단독 수행 (PM 역할 포함)</li>
+        <li><span class="check">✔</span> AIHub 법률 문서 253,207건 전처리 및 4개 분야(민사·형사·행정·지식재산권법) 매핑, OpenSearch 인덱싱</li>
+        <li><span class="check">✔</span> kNN + BM25 하이브리드 검색 설계·구현, 검색 결과가 없거나 유사도가 낮으면 LLM을 호출하지 않고 안내 문구로 대체하는 환각 방지 로직 구현</li>
+        <li><span class="check">✔</span> JWT 기반 인증 및 설명 난이도 4단계 분기 구현 (문맥 길이 차등 포함)</li>
+        <li><span class="check">✔</span> Spring Boot(JPA·Security)와 Spring Legacy(MyBatis) 두 버전을 각각 구현 — JwtFilter·CORS 필터 직접 작성</li>
+        <li><span class="check">✔</span> EXAONE 3.5 파인튜닝을 시도했다가 품질 미달로 Gemma 3 4B(로컬 GGUF)로 전환하는 기술적 의사결정</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="a-section reveal">
+    <span class="a-label">Tech Stack</span>
+    <h2>기술 스택</h2>
+    <div class="tech-pill-row">
+      <span class="skill-pill">FastAPI</span>
+      <span class="skill-pill">Python 3.11</span>
+      <span class="skill-pill">Spring Boot (JPA/Security)</span>
+      <span class="skill-pill">Spring Legacy (Java 11, MyBatis)</span>
+      <span class="skill-pill">JWT</span>
+      <span class="skill-pill">Express</span>
+      <span class="skill-pill">MySQL 8.0</span>
+      <span class="skill-pill">OpenSearch 2.13</span>
+      <span class="skill-pill">Ollama</span>
+      <span class="skill-pill">Gemma 3 4B (GGUF)</span>
+      <span class="skill-pill">sentence-transformers</span>
+      <span class="skill-pill">Oracle Cloud</span>
+    </div>
   </section>
 
   <section class="a-section reveal">
@@ -69,48 +150,42 @@ Gemma 3 4B (Ollama, 4단계 나이대별 프롬프트)</div>
 
     <div class="ps-block">
       <h3>검색 정확도 — BM25와 kNN 단독의 한계</h3>
-      <div class="ps-row"><div class="k">문제</div><div class="v">BM25 단독은 "해약 절차"↔"계약 해지" 같은 유사 표현을 찾지 못했고, kNN 단독은 법률 용어의 정확한 매칭이 떨어졌습니다.</div></div>
-      <div class="ps-row"><div class="k">해결</div><div class="v">bool.should = [ multi_match(boost=2.0), knn(vector, k=5) ] 구조로 BM25 키워드 정확도를 우선하고 kNN으로 의미 검색을 보완했습니다.</div></div>
-      <div class="ps-row"><div class="k">결과</div><div class="v">206,950건(4개 법률 분야)에서 키워드·의미 검색을 동시에 확보하는 최종 방식으로 채택했습니다.</div></div>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">BM25 단독은 "해약 절차"↔"계약 해지"처럼 유사한 표현을 찾지 못했고, kNN 단독은 법률 용어의 정확한 매칭이 떨어졌습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">한국어 형태소 분석기(nori) 없이 standard analyzer로 색인해 조사·어미 처리가 안 되다 보니 BM25 품질에 한계가 뚜렷했고, kNN만으로는 정확한 법률 용어 매칭이 약했습니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">kNN과 BM25를 각각 별도 쿼리로 실행해 점수를 max 정규화한 뒤 가중 합산했습니다(kNN 1.0 : BM25 0.5). BM25 쿼리 내부에서는 본문 필드(text)에 2배 부스트를 적용했습니다.</div></div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">253,207건(4개 법률 분야)에서 키워드·의미 검색을 동시에 확보하는 하이브리드 검색으로 최종 채택했습니다. 형태소 분석기 도입은 다음 개선 과제로 남겨뒀습니다.</div></div>
     </div>
 
     <div class="ps-block">
-      <h3>나이대별 프롬프트 분기</h3>
-      <div class="ps-row"><div class="k">문제</div><div class="v">같은 질문이라도 초등학생과 전문가가 원하는 답변 수준은 달라, 단일 프롬프트로는 두 요구를 동시에 만족시킬 수 없었습니다.</div></div>
-      <div class="ps-row"><div class="k">해결</div><div class="v">~10세 / 11~19세 / 20~40세 / 41세~ 4단계로 나이대를 구분해 프롬프트 특성(쉬운 단어·비유 ↔ 판례 비교·전문 용어)을 차등화하고, JWT에 나이 정보를 담아 로그인 시점부터 전달했습니다.</div></div>
-      <div class="ps-row"><div class="k">결과</div><div class="v">동일 질문에 대해 4단계 응답 스타일이 실제로 구분되어 생성되는 것을 확인했습니다.</div></div>
+      <h3>RAG 컨텍스트 오염 제거</h3>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">검색된 문서를 그대로 LLM 컨텍스트에 넣었더니, 원본 데이터의 질문 문장이나 조회수 표기 같은 노이즈가 답변에 섞여 들어갔습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">원본 데이터가 "Q: 질문\nA: 답변" 형태로 저장돼 있어, 검색된 문서 안의 질문 줄과 "_PAGEVIEW_COUNT_" 같은 메타 텍스트가 그대로 컨텍스트에 포함됐습니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">"Q:"로 시작하는 줄은 건너뛰고, "_PAGEVIEW_COUNT_"를 비롯한 노이즈 패턴을 필터링하는 후처리 로직을 검색 결과 파싱 단계에 추가했습니다.</div></div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">LLM에 전달되는 컨텍스트에서 질문 문장·메타데이터 노이즈를 제거해 답변 품질을 개선했습니다.</div></div>
     </div>
 
     <div class="ps-block">
-      <h3>기술적 의사결정 — EXAONE 파인튜닝을 포기한 이유</h3>
-      <div class="ps-row"><div class="k">문제</div><div class="v">QLoRA 파인튜닝 → Base+LoRA 병합 → GGUF 변환(llama.cpp) → Ollama 등록까지, 1주 기한의 1인 프로젝트에서 단계마다 다른 이유로 막혔습니다 (layer_norm_rms_epsilon key not found, token_embd.weight missing, 비정상 GGUF 파일 등 6가지 문제).</div></div>
-      <div class="ps-row"><div class="k">해결</div><div class="v">6가지 문제를 블로커(모델 자체를 못 띄우는 문제)와 환경 잡음(C드라이브 용량, Windows 호환성 등)으로 구분해 우선순위를 잃지 않고 대응, 모두 해결해 GGUF는 정상 로드·실행됐습니다.</div></div>
-      <div class="ps-row"><div class="k">결과</div><div class="v">그러나 파인튜닝 데이터 부족(약 4천 건)과 아키텍처 패치로 인한 응답 품질 저하로 실서비스 수준에는 미치지 못한다고 판단, 기한 안에서 이미 검증된 base 모델(Gemma 3 4B)로 방향을 전환했습니다.</div></div>
+      <h3>LLM 선택 — EXAONE 파인튜닝을 포기하고 Gemma로 전환한 이유</h3>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">1주 기한 안에서 EXAONE 3.5 7.8B를 QLoRA로 파인튜닝해 GGUF 변환·Ollama 서빙까지 시도했는데, 6가지 문제(레이어 설정 누락, 텐서 누락, 비정상 GGUF 생성 등)를 모두 해결한 뒤에도 답변 품질이 서비스에 쓸 수 없는 수준이었습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">전체 25만 건 중 1주 기한상 분야별 균등 샘플링으로 4천 건만 학습에 사용했고, 이 학습량 부족이 품질 미달의 주원인이라고 판단했습니다. GGUF 변환 과정에서 config.json의 model_type을 llama로 패치한 것도 instruction-following 성능 저하에 영향을 준 것으로 보입니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">"GGUF를 실행 가능하게 만드는 것"과 "서비스에 쓸 수 있는 품질을 확보하는 것"은 별개의 문제라고 판단해, 1주 기한 안에서 이미 검증된 base 모델 Gemma 3 4B로 방향을 전환했습니다. Ollama 레지스트리에서 받은 게 아니라, 로컬에 내려받은 Q8_0 GGUF 파일을 Modelfile로 직접 등록해 서빙했습니다.</div></div>
+      <div class="code-block" style="margin:4px 0 14px;">FROM ./google_gemma-3-4b-it-Q8_0.gguf
+PARAMETER temperature 0.1
+PARAMETER top_p 0.9
+PARAMETER num_ctx 4096
+PARAMETER repeat_penalty 1.1</div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">Q8_0 GGUF(4.1GB) 기반으로 정상 서빙을 확인하고, 1주 기한 안에 동작하는 서비스를 완성했습니다. Gemma가 system role을 지원하지 않아 시스템 프롬프트를 user 메시지에 합쳐 전달하도록 처리했습니다.</div></div>
     </div>
-  </section>
-
-  <section class="a-section reveal">
-    <span class="a-label">Metrics</span>
-    <h2>지표 &amp; 수치</h2>
-    <div class="metric-grid">
-      <div class="metric-card"><div class="m-num">253,207 → 206,950건</div><div class="m-label">데이터 정제 (약 18% 제거)</div></div>
-      <div class="metric-card"><div class="m-num">boost 2.0 · k=5</div><div class="m-label">BM25 + kNN 하이브리드 검색 파라미터</div></div>
-      <div class="metric-card"><div class="m-num">4단계 프롬프트</div><div class="m-label">나이대별 맞춤 응답 분기</div></div>
-      <div class="metric-card"><div class="m-num">6가지 블로커</div><div class="m-label">EXAONE 파인튜닝 과정에서 해결한 기술 문제</div></div>
-    </div>
-  </section>
-
-  <section class="a-section reveal">
-    <span class="a-label">Screenshots</span>
-    <h2>화면 캡처</h2>
-    <div class="shot-placeholder">화면 캡처 추가 예정 — 상담 채팅 화면, 나이대별 응답 비교</div>
   </section>
 
   <section class="a-section reveal">
     <span class="a-label">Learnings</span>
     <h2>배운 점</h2>
     <div class="learnings">
-      <p>6개 문제를 블로커/환경잡음으로 구분해 우선순위를 잃지 않고 대응한 경험, 그리고 기한 안에서 근거 기반으로 기술 방향을 전환한 의사결정 경험을 얻었습니다. "GGUF를 실행 가능하게 만드는 것"과 "서비스에 쓸 수 있는 품질을 확보하는 것"은 별개의 문제라는 점을 체감했습니다. 남은 한계로는 응답 속도(LLM 추론 지연, 경량화·캐싱 필요), 대화 내역 미저장, OpenSearch 보안 미설정(개발환경 한정)이 있습니다.</p>
+      <p>검색 품질은 모델보다 데이터와 인덱싱 방식(형태소 분석기, 하이브리드 가중치)이 먼저 좌우한다는 걸 하이브리드 검색을 튜닝하면서 체감했습니다.</p>
+      <p>모델별로 GGUF 변환 방식과 chat template, system role 지원 여부가 다 달라서, "GGUF를 실행 가능하게 만드는 것"과 "서비스에 쓸 품질을 확보하는 것"은 다른 문제라는 걸 배웠습니다.</p>
+      <p>가입 시 나이로 설명 난이도를 자동 설정하는 방식은 "나이가 많으면 법률 지식도 많다"는 전제가 깔려 있어 한계가 있습니다. 사용자가 직접 난이도를 선택하는 방식이 더 적절하다고 판단했고, 다음 개선 과제로 남겨뒀습니다.</p>
+      <p>현재 남아있는 한계로 대화 내역 미저장(세션 내에서만 유지), OpenSearch 보안 미설정(개발환경 한정), LLM 응답 지연을 스스로 인지하고 있고, 다음 단계로 개선하고 싶은 부분입니다.</p>
     </div>
   </section>
 

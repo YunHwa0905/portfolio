@@ -49,7 +49,7 @@
     <span class="a-label">Project Highlights</span>
     <h2>핵심 성과</h2>
     <ul class="role-check">
-      <li><span class="check">✔</span> REST API 10개 직접 개발</li>
+      <li><span class="check">✔</span> REST API 8개 직접 개발 + SSE 실시간 스트리밍(주차·날씨) 구현</li>
       <li><span class="check">✔</span> SSE 기반 실시간 스트리밍(주차·날씨) 구현</li>
       <li><span class="check">✔</span> JWT + Redis Token Version 인증 구조 설계</li>
     </ul>
@@ -134,8 +134,8 @@
       <ul class="role-check">
         <li><span class="check">✔</span> JWT + Redis Token Version 기반 인증 구조 설계 (로그인·로그아웃·강제 무효화)</li>
         <li><span class="check">✔</span> SSE 기반 실시간 주차 정보 스트리밍 구현 (날씨 스트리밍 공동 개발)</li>
-        <li><span class="check">✔</span> Elasticsearch REST 쿼리 직접 연동 (ParkEsService·WeatherEsService) — RestTemplate 기반 쿼리 작성 및 Aggregation 파싱</li>
-        <li><span class="check">✔</span> User·Place 서비스 API 8개 개발 (인증 5, 장소 3)</li>
+        <li><span class="check">✔</span> Elasticsearch REST 쿼리 직접 연동 (ParkEsService) — RestTemplate 기반 쿼리 작성 및 Aggregation 파싱</li>
+        <li><span class="check">✔</span> REST API 8개 개발 (인증 5: 로그인·리프레시·로그아웃·회원가입·프로필, 장소 3: 지역별 통합조회·카페 목록·카페 상세) + 단일 SSE 스트림(/main/stream)에 주차·날씨 이벤트 스트리밍 구현</li>
       </ul>
       <h3>협업</h3>
       <ul class="role-list">
@@ -164,26 +164,20 @@
     <h2>문제 해결 과정</h2>
 
     <div class="ps-block">
-      <h3>SSE 연결 관리 — ConcurrentModificationException과 좀비 커넥션</h3>
-      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">SSE 연결 해제 시 ConcurrentModificationException이 발생하며 서버 오류로 이어졌습니다.</div></div>
-      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">ArrayList로 emitter 목록을 관리하던 중, 스케줄러가 순회하며 push하는 도중 다른 커넥션 종료로 리스트가 함께 수정되면서 충돌이 발생했습니다.</div></div>
-      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">emitter 목록을 CopyOnWriteArrayList로 교체해 순회 중에도 안전하게 추가·제거가 가능하도록 했습니다. 실제 커넥션 정리는 emitter.send() 실패 시 catch 블록의 emitters.remove(emitter) 예외 처리 로직이 담당합니다.</div></div>
-      <div class="code-block" style="margin:4px 0 14px;">try {
-    emitter.send(SseEmitter.event().data(data));
-} catch (IOException | IllegalStateException e) {
-    emitter.completeWithError(e);
-    emitters.remove(emitter);   // 순회 중 안전하게 제거 (CopyOnWriteArrayList)
-}</div>
-      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">ConcurrentModificationException 발생을 제거하여 5분 주기 SSE를 안정적으로 운영했으며, 여러 사용자가 동시에 연결된 상태에서도 순회 중 예외 없이 스트리밍을 유지했습니다.</div></div>
-      <div class="ps-learn"><b>회고 —</b> SseEmitter(0L)로 타임아웃을 두지 않아 연결 종료 감지가 다음 스케줄러 push 실패 시점에만 일어나, 최대 5분까지 좀비 커넥션이 남을 수 있습니다. 다시 한다면 15~30초 하트비트로 더 적극적으로 감지하고 싶습니다.</div>
-    </div>
-
-    <div class="ps-block">
       <h3>로그아웃 후에도 기존 토큰으로 재인증 가능</h3>
       <div class="ps-row"><div class="k">🚨 문제</div><div class="v">로그아웃 후에도 기존 액세스 토큰으로 API 호출이 성공하는 보안 문제가 있었습니다.</div></div>
       <div class="ps-row"><div class="k">🔍 원인</div><div class="v">JWT는 stateless 구조라 발급 후 서버에서 즉시 무효화가 불가능했습니다.</div></div>
       <div class="ps-row"><div class="k">🛠 해결</div><div class="v">Redis에 token:version:{userId} 키로 유효한 토큰 버전을 저장하고, 매 요청마다 isLatestToken()으로 검증했습니다.</div></div>
       <div class="ps-row"><div class="k">✅ 결과</div><div class="v">Redis Token Version 검증으로 발급 이전 토큰 사용을 차단했습니다.</div></div>
+    </div>
+
+    <div class="ps-block">
+      <h3>주차 정보 조회 — 지역별 개별 쿼리에서 전체 Aggregation으로 전환</h3>
+      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">초기 구현은 지역마다 Elasticsearch에 개별 term 쿼리를 보내 주차 데이터를 조회하는 방식이었는데, 지역 수만큼 요청이 늘어났습니다.</div></div>
+      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">주차 데이터 인덱스가 seoul_citydata_parking_{날짜} 형태로 매일 새 문서가 쌓이는 구조라, 단순 term 쿼리로는 지역별 "최신" 문서를 구분할 수 없었고 지역 수만큼 반복 호출해야 하는 비효율도 있었습니다.</div></div>
+      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">terms + top_hits aggregation으로 전체 지역의 최신 데이터를 단일 쿼리로 가져오도록 재작성했습니다. aggregations→by_area→buckets→latest_hit→hits→_source→parking으로 이어지는 중첩 구조를 파싱하고, aggregations 키가 없거나 특정 지역 데이터가 비어있는 경우를 대비한 방어 코드를 추가했습니다.</div></div>
+      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">지역 수와 무관하게 단일 쿼리로 전체 지역의 최신 주차 데이터를 안정적으로 가져오도록 개선했습니다.</div></div>
+      <div class="ps-learn"><b>회고 —</b> 처음 짰던 지역별 개별 조회 코드가 지금도 주석으로 남아있는데, 다시 보면서 "일단 동작하는 코드"와 "효율적인 코드"는 다른 문제라는 걸 느꼈습니다.</div>
     </div>
   </section>
 
@@ -211,7 +205,7 @@
     <h2>배운 점</h2>
     <div class="learnings">
       <p>서비스를 나누는 작업 자체보다, User와 Place처럼 겹쳐 보이는 기능 사이에서 책임을 어디까지 나눌지 판단하는 게 더 어려웠습니다.</p>
-      <p>SSE에서는 예외가 안 나게 막는 것보다, 연결이 끊긴 뒤에 그걸 어떻게 회수하느냐가 더 중요하다는 걸 이번에 직접 겪었습니다.</p>
+      <p>지역별로 하나씩 조회하던 코드가 그 자체로는 틀리지 않았지만, 요청 수와 최신 데이터 판별이라는 두 가지 문제를 한꺼번에 풀려면 구조 자체를 aggregation 방식으로 바꿔야 한다는 걸 배웠습니다.</p>
       <p>처음에는 JWT만으로 인증을 끝내려 했지만, 로그아웃을 즉시 반영할 수 없다는 한계에 부딪혔습니다. Redis Token Version 방식을 적용하면서, Stateless 인증에도 서버 쪽 상태 관리가 필요한 순간이 있다는 걸 경험했습니다.</p>
       <p>나중에 코드를 다시 보니, External Info와 Congestion 두 서비스가 각자 RestTemplate로 Elasticsearch에 직접 쿼리를 보내는 동일한 패턴을 독립적으로 구현하고 있었습니다. 공통 ES 클라이언트나 쿼리 빌더로 추출했다면 중복을 줄일 수 있었겠다는 아쉬움이 남습니다.</p>
     </div>

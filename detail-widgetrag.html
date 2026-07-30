@@ -1,214 +1,272 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WidgetRAG | 이윤화 포트폴리오</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WidgetRAG | 이윤화 포트폴리오</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="topbar detail-wide">
-  <div class="topbar-inner">
-    <div class="topbar-name"><span class="mono">이</span>이윤화</div>
-    <div class="topbar-links"><a href="index.html#projects">← Projects</a></div>
+  <div class="topbar detail-wide">
+    <div class="topbar-inner">
+      <div class="topbar-name"><span class="mono">이</span>이윤화</div>
+      <div class="topbar-links"><a href="index.html#projects">← Projects</a></div>
+    </div>
   </div>
-</div>
 
-<main class="detail-main">
-  <header class="article-header">
-    <div class="role hero-fade">Case Study</div>
-    <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">Backend</span><span class="tag">AI</span><span class="tag">RAG</span></div>
-    <h1 class="hero-fade-delay-1">WidgetRAG — B2B SaaS RAG 상품 추천 챗봇</h1>
-    <div class="a-period hero-fade-delay-2">2026.06.19 – 2026.07.10 (22일) · 팀 2명 (BE 1 · FE 1) · 백엔드 + RAG 파이프라인 + 크롤링</div>
-    <blockquote class="hero-fade-delay-2">스크립트 한 줄로 설치하는 B2B SaaS RAG 상품 추천 챗봇입니다.</blockquote>
-    <div class="hero-cta hero-fade-delay-2" style="margin-top:20px;">
-      <a class="hero-btn primary" href="https://github.com/ghd329/WidgetRAG" target="_blank" rel="noopener">GitHub <span class="arrow">→</span></a>
-      <a class="hero-btn" href="#demo">Demo <span class="arrow">→</span></a>
-      <a class="hero-btn" href="https://documenter.getpostman.com/view/40815560/2sBY4SMKFt" target="_blank" rel="noopener">API Docs <span class="arrow">→</span></a>
-    </div>
-  </header>
+  <main class="detail-main">
+    <header class="article-header">
+      <div class="role hero-fade">Case Study</div>
+      <div class="tag-row hero-fade-delay-1"><span class="tag tag-gold">Backend</span><span class="tag">AI</span><span
+          class="tag">RAG</span></div>
+      <h1 class="hero-fade-delay-1">WidgetRAG — B2B SaaS RAG 상품 추천 챗봇</h1>
+      <div class="a-period hero-fade-delay-2">2026.06.19 – 2026.07.10 (22일) · 팀 2명 (BE 1 · FE 1) · 백엔드 + RAG 파이프라인 + 크롤링
+      </div>
+      <blockquote class="hero-fade-delay-2">스크립트 한 줄로 설치하는 B2B SaaS RAG 상품 추천 챗봇입니다.</blockquote>
+      <div class="hero-cta hero-fade-delay-2" style="margin-top:20px;">
+        <a class="hero-btn primary" href="https://github.com/ghd329/WidgetRAG" target="_blank" rel="noopener">GitHub
+          <span class="arrow">→</span></a>
+        <a class="hero-btn" href="#demo">Demo <span class="arrow">→</span></a>
+        <a class="hero-btn" href="https://documenter.getpostman.com/view/40815560/2sBY4SMKFt" target="_blank"
+          rel="noopener">API Docs <span class="arrow">→</span></a>
+      </div>
+    </header>
 
-  <section class="a-section reveal">
-    <span class="a-label">Overview</span>
-    <h2>프로젝트 개요</h2>
-    <div class="ps-row"><div class="k">Problem</div><div class="v">쇼핑몰마다 실시간 상담 인력을 두기 어렵고, 범용 챗봇은 실제 상품 데이터를 반영하지 못해 엉뚱한 답변(환각)을 내는 문제가 있었습니다.</div></div>
-    <div class="ps-row"><div class="k">Solution</div><div class="v">상품 CSV 업로드만으로 상품 DB를 학습한 RAG 챗봇을 자동 생성하고, 검색된 상품 목록 안에서만 답변하도록 설계해 환각을 최소화했습니다. client_code 기반 멀티테넌시로 여러 쇼핑몰을 하나의 엔진으로 동시 운영합니다.</div></div>
-  </section>
+    <section class="a-section reveal">
+      <span class="a-label">Overview</span>
+      <h2>프로젝트 개요</h2>
+      <div class="ps-row">
+        <div class="k">Problem</div>
+        <div class="v">쇼핑몰마다 실시간 상담 인력을 두기 어렵고, 범용 챗봇은 실제 상품 데이터를 반영하지 못해 엉뚱한 답변(환각)을 내는 문제가 있었습니다.</div>
+      </div>
+      <div class="ps-row">
+        <div class="k">Solution</div>
+        <div class="v">상품 CSV 업로드만으로 상품 DB를 학습한 RAG 챗봇을 자동 생성하고, 검색된 상품 목록 안에서만 답변하도록 설계해 환각을 최소화했습니다. client_code 기반
+          멀티테넌시로 여러 쇼핑몰을 하나의 엔진으로 동시 운영합니다.</div>
+      </div>
+    </section>
 
-  <section class="a-section reveal">
-    <span class="a-label">Project Highlights</span>
-    <h2>핵심 성과</h2>
-    <ul class="role-check">
-      <li><span class="check">✔</span> Spring Boot 백엔드 설계·구현 + RAG 파이프라인(임베딩·검색·프롬프트·Fallback) 전체 구현</li>
-      <li><span class="check">✔</span> 계측 로그로 업로드 병목(임베딩+색인 95.8%) 진단, 이후 발생한 AI 서버 타임아웃 버그 진단·수정</li>
-      <li><span class="check">✔</span> client_code 기반 멀티테넌시 격리 아키텍처 설계 (66girls·Daiso 동시 운영)</li>
-    </ul>
-  </section>
-
-  <section class="a-section reveal" id="demo">
-    <span class="a-label">Demo</span>
-    <h2>시연 영상</h2>
-    <video class="diagram-svg" controls preload="metadata">
-      <source src="https://github.com/YunHwa0905/portfolio/releases/download/v1.0-demov/widgetrag-demo.mp4" type="video/mp4">
-      브라우저가 video 태그를 지원하지 않습니다. <a href="https://github.com/YunHwa0905/portfolio/releases/download/v1.0-demov/widgetrag-demo.mp4">영상 다운로드</a>
-    </video>
-  </section>
-
-  <section class="a-section reveal">
-    <span class="a-label">Architecture</span>
-    <h2>아키텍처</h2>
-    <ul class="role-list">
-      <li>관리자 웹(Biz Admin)·쇼핑몰 위젯(66girls·Daiso)이 widget.js 한 줄 삽입으로 Spring Boot 백엔드와 REST 통신</li>
-      <li>Spring Boot가 인증·상품·RAG 오케스트레이션 담당, PostgreSQL(company/member/product)과 OpenSearch(client_code 필터·kNN) 연동</li>
-      <li>Python AI 서버(FastAPI)가 bge-m3 임베딩과 Gemma/EXAONE 응답 생성을 로컬 GPU에서 처리</li>
-      <li>모든 테이블이 companyId(FK)로 연결되어 client_code 기준으로 논리적으로 완전 격리</li>
-    </ul>
-    <svg class="diagram-svg" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="margin-top:14px;">
-      <defs>
-        <marker id="arrow4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-          <path d="M0,0 L8,4 L0,8 z" fill="#8a8f99"/>
-        </marker>
-      </defs>
-
-      <rect x="20" y="20" width="180" height="42" rx="6" fill="#f2f2f0" stroke="#c8cad0" stroke-width="1.5"/>
-      <text x="110" y="46" text-anchor="middle" fill="#9aa0a8" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">Biz Admin (팀원)</text>
-
-      <rect x="220" y="20" width="180" height="42" rx="6" fill="#f2f2f0" stroke="#c8cad0" stroke-width="1.5"/>
-      <text x="310" y="46" text-anchor="middle" fill="#9aa0a8" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">쇼핑몰 위젯 (팀원)</text>
-
-      <line x1="110" y1="62" x2="270" y2="98" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)"/>
-      <line x1="310" y1="62" x2="310" y2="98" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)"/>
-
-      <rect x="150" y="100" width="320" height="46" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
-      <text x="310" y="128" text-anchor="middle" fill="#1b64da" font-size="13" font-family="Pretendard, sans-serif" font-weight="700">Spring Boot Backend (인증·상품·RAG 오케스트레이션)</text>
-
-      <line x1="230" y1="146" x2="180" y2="184" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)"/>
-      <line x1="390" y1="146" x2="440" y2="184" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)"/>
-
-      <rect x="60" y="186" width="150" height="42" rx="6" fill="#1f3a5f"/>
-      <text x="135" y="211" text-anchor="middle" fill="#f5efe1" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">PostgreSQL</text>
-
-      <rect x="370" y="186" width="150" height="42" rx="6" fill="#1f3a5f"/>
-      <text x="445" y="211" text-anchor="middle" fill="#f5efe1" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">OpenSearch</text>
-
-      <line x1="445" y1="228" x2="445" y2="252" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)"/>
-
-      <rect x="330" y="254" width="230" height="50" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2"/>
-      <text x="445" y="276" text-anchor="middle" fill="#1b64da" font-size="12" font-family="Pretendard, sans-serif" font-weight="700">AI Server (FastAPI)</text>
-      <text x="445" y="293" text-anchor="middle" fill="#1b64da" font-size="10" font-family="Pretendard, sans-serif">bge-m3 · Gemma/EXAONE (로컬 GPU)</text>
-    </svg>
-    <p class="code-note" style="margin-top:10px;">파란색이 직접 설계·구현한 영역입니다(Backend·RAG 파이프라인·AI 서버 연동). Biz Admin과 쇼핑몰 위젯(widget.js) 프론트엔드는 팀원 담당입니다. LLM은 본인이 Gemma로, 팀원이 EXAONE으로 각각 연동해 두 모델 모두 지원되는 구조를 검증했습니다.</p>
-  </section>
-
-  <section class="a-section reveal">
-    <span class="a-label">My Role</span>
-    <h2>본인 역할</h2>
-    <div class="role-split">
-      <h3>핵심 기여</h3>
+    <section class="a-section reveal">
+      <span class="a-label">Project Highlights</span>
+      <h2>핵심 성과</h2>
       <ul class="role-check">
-        <li><span class="check">✔</span> Spring Boot 백엔드 설계·구현 (인증·상품·RAG 오케스트레이션)</li>
-        <li><span class="check">✔</span> RAG 파이프라인 구현 (임베딩→검색→Fallback 판단→로그 적재), Gemma 기반 응답 생성 연동 — 팀원이 EXAONE을 추가로 연동해 두 LLM 모두 지원되는 구조를 검증</li>
-        <li><span class="check">✔</span> 데이터 크롤링·전처리 (Selenium·BeautifulSoup)</li>
-        <li><span class="check">✔</span> OpenSearch·AI 서버(FastAPI) 연동, 서버 기술문서(모델정의서·테이블정의서) 작성</li>
+        <li><span class="check">✔</span> Spring Boot 백엔드 설계·구현 + RAG 파이프라인(임베딩·검색·프롬프트·Fallback) 전체 구현</li>
+        <li><span class="check">✔</span> 계측 로그로 업로드 병목(임베딩+색인 95.8%) 진단, 이후 발생한 AI 서버 타임아웃 버그 진단·수정</li>
+        <li><span class="check">✔</span> client_code 기반 멀티테넌시 격리 아키텍처 설계 (66girls·Daiso 동시 운영)</li>
       </ul>
-    </div>
-  </section>
+    </section>
 
-  <section class="a-section reveal">
-    <span class="a-label">Tech Stack</span>
-    <h2>기술 스택</h2>
-    <div class="tech-pill-row">
-      <span class="skill-pill">Spring Boot</span>
-      <span class="skill-pill">Java 17</span>
-      <span class="skill-pill">PostgreSQL</span>
-      <span class="skill-pill">Spring Data JPA</span>
-      <span class="skill-pill">Spring Security</span>
-      <span class="skill-pill">OpenSearch</span>
-      <span class="skill-pill">FastAPI</span>
-      <span class="skill-pill">bge-m3</span>
-      <span class="skill-pill">Gemma / EXAONE</span>
-      <span class="skill-pill">Selenium</span>
-      <span class="skill-pill">BeautifulSoup</span>
-    </div>
-  </section>
+    <section class="a-section reveal" id="demo">
+      <span class="a-label">Demo</span>
+      <h2>시연 영상</h2>
+      <video class="diagram-svg" controls preload="metadata">
+        <source src="https://github.com/YunHwa0905/portfolio/releases/download/v1.0-demov/widgetrag-demo.mp4"
+          type="video/mp4">
+        브라우저가 video 태그를 지원하지 않습니다. <a
+          href="https://github.com/YunHwa0905/portfolio/releases/download/v1.0-demov/widgetrag-demo.mp4">영상 다운로드</a>
+      </video>
+    </section>
 
-  <section class="a-section reveal">
-    <span class="a-label">Problem Solving</span>
-    <h2>문제 해결 과정</h2>
-
-    <div class="ps-block">
-      <h3>업로드 성능 진단 — 병목 계측과 타임아웃 버그 수정</h3>
-      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">대량 상품 데이터(daiso 12,090개 기준) 업로드 시 처리 시간이 33분 59초로 과도하게 길었습니다.</div></div>
-      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">각 단계(CSV 파싱+DB 저장, 임베딩+색인)의 소요 시간을 계측 로그로 남겨 비교한 결과, 임베딩+OpenSearch 색인 구간이 전체 처리시간의 약 95.8%(27분 32초)를 차지하는 병목으로 확인됐습니다.</div></div>
-      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">이 계측 결과를 근거로 팀원이 임베딩 요청을 배치(batch) 단위로 묶어 처리하도록 파이프라인을 재설계했고, 이후 대용량 업로드 과정에서 발생한 AI 서버 타임아웃 문제를 계측 로그를 근거로 진단하고 수정했습니다.</div></div>
-      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">동일 데이터셋 기준 총 처리시간이 33분 59초에서 16분 13초로 약 52.3% 단축됐습니다(배치 재설계는 팀원 담당, 병목 진단과 이후 타임아웃 버그 수정은 계측 로그를 기반으로 본인이 담당).</div></div>
-      <div class="ps-learn"><b>회고 —</b> 대량 업로드 시 GPU 리소스를 모니터링하는 체계가 아직 없어, 다음 단계로 개선하고 싶은 부분입니다.</div>
-    </div>
-
-    <div class="ps-block">
-      <h3>환각(Hallucination) 방지 — 상품이 없어도 답변이 나오는 문제</h3>
-      <div class="ps-row"><div class="k">🚨 문제</div><div class="v">검색 결과가 없거나 GPU 서버 응답이 지연·실패할 때, LLM이 실제로 없는 상품을 지어내 답변할 위험이 있었습니다.</div></div>
-      <div class="ps-row"><div class="k">🔍 원인</div><div class="v">프롬프트에 "검색된 상품 목록 안에서만 답변"하도록 지시해도, 검색 결과 자체가 비어있거나 응답이 실패하는 상황은 별도로 처리되지 않았습니다.</div></div>
-      <div class="ps-row"><div class="k">🛠 해결</div><div class="v">OpenSearch 검색결과 0건 / GPU 서버 응답지연·타임아웃 / GPU 서버 연결실패 세 가지 조건 중 하나라도 충족되면 목업(mock) 응답으로 대체하는 Fallback 정책을 구현했습니다.</div></div>
-      <div class="ps-row"><div class="k">✅ 결과</div><div class="v">실제 상품이 검색되지 않은 상황에서 LLM이 상품을 지어내는 경우를 원천 차단했습니다. AI 서버를 실제로 종료한 뒤 /api/chat을 호출하는 장애 주입 테스트로 Fallback 경로가 정상 동작하는지 직접 검증했습니다.</div></div>
-    </div>
-
-    <div class="ps-block">
-      <h3>그 외 해결한 문제들</h3>
-      <ul class="role-check">
-        <li><span class="check">✔</span> Map.of()에 null 값이 포함되면 예외 발생 → HashMap으로 교체</li>
-        <li><span class="check">✔</span> 127.0.0.1·localhost 혼용으로 Origin이 달라져 세션 쿠키 공유 실패 → Base URL 오리진 통일</li>
-        <li><span class="check">✔</span> 같은 상품이 여러 CSV 파일에 걸쳐 등록되는 경우를 고려해, 마지막 참조가 삭제될 때만 실제로 지우는 소프트 삭제 + 참조 카운트 로직 설계</li>
-        <li><span class="check">✔</span> 실데이터 검증 중 CSV BOM·중복 상품ID 발견 → 중복 상품ID 처리 로직 보강</li>
+    <section class="a-section reveal">
+      <span class="a-label">Architecture</span>
+      <h2>아키텍처</h2>
+      <ul class="role-list">
+        <li>관리자 웹(Biz Admin)·쇼핑몰 위젯(66girls·Daiso)이 widget.js 한 줄 삽입으로 Spring Boot 백엔드와 REST 통신</li>
+        <li>Spring Boot가 인증·상품·RAG 오케스트레이션 담당, PostgreSQL(company/member/product)과 OpenSearch(client_code 필터·kNN) 연동
+        </li>
+        <li>Python AI 서버(FastAPI)가 bge-m3 임베딩과 Gemma/EXAONE 응답 생성을 로컬 GPU에서 처리</li>
+        <li>모든 테이블이 companyId(FK)로 연결되어 client_code 기준으로 논리적으로 완전 격리</li>
       </ul>
+      <svg class="diagram-svg" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="margin-top:14px;">
+        <defs>
+          <marker id="arrow4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="#8a8f99" />
+          </marker>
+        </defs>
+
+        <rect x="20" y="20" width="180" height="42" rx="6" fill="#f2f2f0" stroke="#c8cad0" stroke-width="1.5" />
+        <text x="110" y="46" text-anchor="middle" fill="#9aa0a8" font-size="12" font-family="Pretendard, sans-serif"
+          font-weight="700">Biz Admin (팀원)</text>
+
+        <rect x="220" y="20" width="180" height="42" rx="6" fill="#f2f2f0" stroke="#c8cad0" stroke-width="1.5" />
+        <text x="310" y="46" text-anchor="middle" fill="#9aa0a8" font-size="12" font-family="Pretendard, sans-serif"
+          font-weight="700">쇼핑몰 위젯 (팀원)</text>
+
+        <line x1="110" y1="62" x2="270" y2="98" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)" />
+        <line x1="310" y1="62" x2="310" y2="98" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)" />
+
+        <rect x="150" y="100" width="320" height="46" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2" />
+        <text x="310" y="128" text-anchor="middle" fill="#1b64da" font-size="13" font-family="Pretendard, sans-serif"
+          font-weight="700">Spring Boot Backend (인증·상품·RAG 오케스트레이션)</text>
+
+        <line x1="230" y1="146" x2="180" y2="184" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)" />
+        <line x1="390" y1="146" x2="440" y2="184" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)" />
+
+        <rect x="60" y="186" width="150" height="42" rx="6" fill="#1f3a5f" />
+        <text x="135" y="211" text-anchor="middle" fill="#f5efe1" font-size="12" font-family="Pretendard, sans-serif"
+          font-weight="700">PostgreSQL</text>
+
+        <rect x="370" y="186" width="150" height="42" rx="6" fill="#1f3a5f" />
+        <text x="445" y="211" text-anchor="middle" fill="#f5efe1" font-size="12" font-family="Pretendard, sans-serif"
+          font-weight="700">OpenSearch</text>
+
+        <line x1="445" y1="228" x2="445" y2="252" stroke="#8a8f99" stroke-width="1.2" marker-end="url(#arrow4)" />
+
+        <rect x="330" y="254" width="230" height="50" rx="6" fill="#e8f3ff" stroke="#1b64da" stroke-width="2" />
+        <text x="445" y="276" text-anchor="middle" fill="#1b64da" font-size="12" font-family="Pretendard, sans-serif"
+          font-weight="700">AI Server (FastAPI)</text>
+        <text x="445" y="293" text-anchor="middle" fill="#1b64da" font-size="10"
+          font-family="Pretendard, sans-serif">bge-m3 · Gemma/EXAONE (로컬 GPU)</text>
+      </svg>
+      <p class="code-note" style="margin-top:10px;">파란색이 직접 설계·구현한 영역입니다(Backend·RAG 파이프라인·AI 서버 연동). Biz Admin과 쇼핑몰
+        위젯(widget.js) 프론트엔드는 팀원 담당입니다. LLM은 본인이 Gemma로, 팀원이 EXAONE으로 각각 연동해 두 모델 모두 지원되는 구조를 검증했습니다.</p>
+    </section>
+
+    <section class="a-section reveal">
+      <span class="a-label">My Role</span>
+      <h2>본인 역할</h2>
+      <div class="role-split">
+        <h3>핵심 기여</h3>
+        <ul class="role-check">
+          <li><span class="check">✔</span> Spring Boot 백엔드 설계·구현 (인증·상품·RAG 오케스트레이션)</li>
+          <li><span class="check">✔</span> RAG 파이프라인 구현 (임베딩→검색→Fallback 판단→로그 적재), Gemma 기반 응답 생성 연동 — 팀원이 EXAONE을 추가로
+            연동해 두 LLM 모두 지원되는 구조를 검증</li>
+          <li><span class="check">✔</span> 데이터 크롤링·전처리 (Selenium·BeautifulSoup)</li>
+          <li><span class="check">✔</span> OpenSearch·AI 서버(FastAPI) 연동, 서버 기술문서(모델정의서·테이블정의서) 작성</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="a-section reveal">
+      <span class="a-label">Tech Stack</span>
+      <h2>기술 스택</h2>
+      <div class="tech-pill-row">
+        <span class="skill-pill">Spring Boot</span>
+        <span class="skill-pill">Java 17</span>
+        <span class="skill-pill">PostgreSQL</span>
+        <span class="skill-pill">Spring Data JPA</span>
+        <span class="skill-pill">Spring Security</span>
+        <span class="skill-pill">OpenSearch</span>
+        <span class="skill-pill">FastAPI</span>
+        <span class="skill-pill">bge-m3</span>
+        <span class="skill-pill">Gemma / EXAONE</span>
+        <span class="skill-pill">Selenium</span>
+        <span class="skill-pill">BeautifulSoup</span>
+      </div>
+    </section>
+
+    <section class="a-section reveal">
+      <span class="a-label">Problem Solving</span>
+      <h2>문제 해결 과정</h2>
+
+      <div class="ps-block">
+        <h3>업로드 성능 진단 — 병목 계측과 타임아웃 버그 수정</h3>
+        <div class="ps-row">
+          <div class="k">🚨 문제</div>
+          <div class="v">대량 상품 데이터(daiso 12,090개 기준) 업로드 시 처리 시간이 33분 59초로 과도하게 길었습니다.</div>
+        </div>
+        <div class="ps-row">
+          <div class="k">🔍 원인</div>
+          <div class="v">각 단계(CSV 파싱+DB 저장, 임베딩+색인)의 소요 시간을 계측 로그로 남겨 비교한 결과, 임베딩+OpenSearch 색인 구간이 전체 처리시간의 약 95.8%(27분
+            32초)를 차지하는 병목으로 확인됐습니다.</div>
+        </div>
+        <div class="ps-row">
+          <div class="k">🛠 해결</div>
+          <div class="v">이 계측 결과를 근거로 팀원이 임베딩 요청을 배치(batch) 단위로 묶어 처리하도록 파이프라인을 재설계했고, 이후 대용량 업로드 과정에서 발생한 AI 서버 타임아웃
+            문제를 계측 로그를 근거로 진단하고 수정했습니다.</div>
+        </div>
+        <div class="ps-row">
+          <div class="k">✅ 결과</div>
+          <div class="v">동일 데이터셋 기준 총 처리시간이 33분 59초에서 16분 13초로 약 52.3% 단축됐습니다(배치 재설계는 팀원 담당, 병목 진단과 이후 타임아웃 버그 수정은 계측
+            로그를 기반으로 본인이 담당).</div>
+        </div>
+        <div class="ps-learn"><b>회고 —</b> 대량 업로드 시 GPU 리소스를 모니터링하는 체계가 아직 없어, 다음 단계로 개선하고 싶은 부분입니다.</div>
+      </div>
+
+      <div class="ps-block">
+        <h3>환각(Hallucination) 방지 — 상품이 없어도 답변이 나오는 문제</h3>
+        <div class="ps-row">
+          <div class="k">🚨 문제</div>
+          <div class="v">검색 결과가 없거나 GPU 서버 응답이 지연·실패할 때, LLM이 실제로 없는 상품을 지어내 답변할 위험이 있었습니다.</div>
+        </div>
+        <div class="ps-row">
+          <div class="k">🔍 원인</div>
+          <div class="v">프롬프트에 "검색된 상품 목록 안에서만 답변"하도록 지시해도, 검색 결과 자체가 비어있거나 응답이 실패하는 상황은 별도로 처리되지 않았습니다.</div>
+        </div>
+        <div class="ps-row">
+          <div class="k">🛠 해결</div>
+          <div class="v">OpenSearch 검색결과 0건 / GPU 서버 응답지연·타임아웃 / GPU 서버 연결실패 세 가지 조건 중 하나라도 충족되면 목업(mock) 응답으로 대체하는
+            Fallback 정책을 구현했습니다.</div>
+        </div>
+        <div class="ps-row">
+          <div class="k">✅ 결과</div>
+          <div class="v">실제 상품이 검색되지 않은 상황에서 LLM이 상품을 지어내는 경우를 원천 차단했습니다. AI 서버를 실제로 종료한 뒤 /api/chat을 호출하는 장애 주입 테스트로
+            Fallback 경로가 정상 동작하는지 직접 검증했습니다.</div>
+        </div>
+      </div>
+
+      <div class="ps-block">
+        <h3>그 외 해결한 문제들</h3>
+        <ul class="role-check">
+          <li><span class="check">✔</span> Map.of()에 null 값이 포함되면 예외 발생 → HashMap으로 교체</li>
+          <li><span class="check">✔</span> 127.0.0.1·localhost 혼용으로 Origin이 달라져 세션 쿠키 공유 실패 → Base URL 오리진 통일</li>
+          <li><span class="check">✔</span> 같은 상품이 여러 CSV 파일에 걸쳐 등록되는 경우를 고려해, 마지막 참조가 삭제될 때만 실제로 지우는 소프트 삭제 + 참조 카운트 로직
+            설계</li>
+          <li><span class="check">✔</span> 실데이터 검증 중 CSV BOM·중복 상품ID 발견 → 중복 상품ID 처리 로직 보강</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="a-section reveal">
+      <span class="a-label">Screenshots</span>
+      <h2>화면 캡처</h2>
+      <div class="shot-grid">
+        <figure>
+          <img src="assets/widgetrag-shot-widget.png" alt="WidgetRAG 쇼핑몰 위젯 챗봇 화면 — AI 쇼핑 도우미">
+          <figcaption>쇼핑몰 위젯 챗봇</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/widgetrag-shot-admin.png" alt="WidgetRAG 관리자 홈 대시보드 — 등록상품·고객질문·AI답변·챗봇상태">
+          <figcaption>관리자 대시보드</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/widgetrag-shot-install.png" alt="WidgetRAG 위젯 설치 코드 화면 — 스크립트 한 줄 삽입">
+          <figcaption>스크립트 한 줄 설치</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="a-section reveal">
+      <span class="a-label">Learnings</span>
+      <h2>배운 점</h2>
+      <div class="learnings">
+        <p>멀티테넌시 격리를 물리(WSL 폴더)·논리(OpenSearch 필터, PostgreSQL FK) 두 층으로 나눠 설계하면서, "격리됐다"는 말을 증명하려면 계층별로 각각 검증해야 한다는 걸
+          배웠습니다.</p>
+        <p>병목 구간을 추측이 아니라 계측 로그로 먼저 확인(95.8%)하면서, 성능 개선은 감이 아니라 측정에서 시작된다는 걸 체감했습니다.</p>
+        <p>RAG 파이프라인을 처음부터 끝까지 설계하며, "검색이 잘 되는 것"과 "검색이 안 됐을 때 안전하게 실패하는 것"은 똑같이 중요한 설계 요소라는 걸 배웠습니다.</p>
+        <p>README에 JWT 미도입, 테스트 코드 부재, CI/CD 부재 같은 "알려진 이슈"를 스스로 정리해두면서, 완성도보다 지금 상태를 정확히 파악하고 있는 게 더 중요하다는 걸 느꼈습니다.</p>
+      </div>
+    </section>
+
+    <div class="detail-footer">
+      <a class="back-link" href="index.html#projects">← 포트폴리오로 돌아가기</a>
+      <div>© 2026 Yoonhwa Lee.</div>
     </div>
-  </section>
+  </main>
 
-  <section class="a-section reveal">
-    <span class="a-label">Screenshots</span>
-    <h2>화면 캡처</h2>
-    <div class="shot-grid">
-      <figure>
-        <img src="assets/widgetrag-shot-widget.png" alt="WidgetRAG 쇼핑몰 위젯 챗봇 화면 — AI 쇼핑 도우미">
-        <figcaption>쇼핑몰 위젯 챗봇</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/widgetrag-shot-admin.png" alt="WidgetRAG 관리자 홈 대시보드 — 등록상품·고객질문·AI답변·챗봇상태">
-        <figcaption>관리자 대시보드</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/widgetrag-shot-install.png" alt="WidgetRAG 위젯 설치 코드 화면 — 스크립트 한 줄 삽입">
-        <figcaption>스크립트 한 줄 설치</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="a-section reveal">
-    <span class="a-label">Learnings</span>
-    <h2>배운 점</h2>
-    <div class="learnings">
-      <p>멀티테넌시 격리를 물리(WSL 폴더)·논리(OpenSearch 필터, PostgreSQL FK) 두 층으로 나눠 설계하면서, "격리됐다"는 말을 증명하려면 계층별로 각각 검증해야 한다는 걸 배웠습니다.</p>
-      <p>병목 구간을 추측이 아니라 계측 로그로 먼저 확인(95.8%)하면서, 성능 개선은 감이 아니라 측정에서 시작된다는 걸 체감했습니다.</p>
-      <p>RAG 파이프라인을 처음부터 끝까지 설계하며, "검색이 잘 되는 것"과 "검색이 안 됐을 때 안전하게 실패하는 것"은 똑같이 중요한 설계 요소라는 걸 배웠습니다.</p>
-      <p>README에 JWT 미도입, 테스트 코드 부재, CI/CD 부재 같은 "알려진 이슈"를 스스로 정리해두면서, 완성도보다 지금 상태를 정확히 파악하고 있는 게 더 중요하다는 걸 느꼈습니다.</p>
-    </div>
-  </section>
-
-  <div class="detail-footer">
-    <a class="back-link" href="index.html#projects">← 포트폴리오로 돌아가기</a>
-    <div>© 2026 Yoonhwa Lee.</div>
-  </div>
-</main>
-
-<script>
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target);} });
-  }, { threshold: 0.1 });
-  revealEls.forEach(el=>revealObserver.observe(el));
-</script>
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => revealObserver.observe(el));
+  </script>
 </body>
+
 </html>
